@@ -110,30 +110,6 @@
             margin-bottom: 8px;
         }
         
-        .contact-info {
-            background: #faf8f5;
-            padding: 20px;
-            margin: 20px 0;
-            border: 1px solid #efede9;
-        }
-        
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 0;
-            border-bottom: 1px solid #efede9;
-        }
-        
-        .contact-item:last-child {
-            border-bottom: none;
-        }
-        
-        .contact-icon {
-            font-size: 24px;
-            width: 40px;
-        }
-        
         /* 語言切換 */
         .lang-switch {
             display: flex;
@@ -1130,47 +1106,77 @@
             </div>
         </div>
         
-        <!-- 聯絡我們頁面 - 新增 Email + 問題表單 -->
+        <!-- 聯絡我們頁面 - 移除範例 Email，加入簡潔裝飾 -->
         <div id="contactPage" class="page">
             <div class="page-content">
-                <h1>📧 聯絡我們</h1>
-                <p>我們很樂意聽到您的聲音！無論是問題、建議還是回饋，都歡迎與我們聯絡。</p>
+                <!-- 簡單的裝飾線條 -->
+                <div style="width: 40px; height: 2px; background: #e0ddd8; margin-bottom: 20px;"></div>
+                
+                <h1 style="margin-top: 0;">📧 聯絡我們</h1>
+                <p style="color: #8b8b8b;">我們很樂意聽到您的聲音！無論是問題、建議還是回饋，都歡迎與我們聯絡。</p>
+                
+                <!-- 裝飾分隔線 -->
+                <div style="height: 1px; background: linear-gradient(90deg, #efede9, #efede9, transparent); margin: 28px 0 32px 0;"></div>
                 
                 <!-- 聯絡表單 -->
-                <div style="background: #faf8f5; padding: 24px; margin: 20px 0; border: 1px solid #efede9;">
-                    <div style="margin-bottom: 20px;">
-                        <label style="display: block; font-size: 13px; color: #6b6b6b; margin-bottom: 8px;">電子郵件 *</label>
-                        <input type="email" id="contactEmail" placeholder="您的電子郵件" style="width: 100%; padding: 12px; border: 1px solid #e0ddd8; background: white;">
+                <div style="background: #ffffff; padding: 28px; border: 1px solid #efede9; margin-bottom: 32px;">
+                    <div style="margin-bottom: 24px;">
+                        <label style="display: block; font-size: 13px; color: #6b6b6b; margin-bottom: 8px; letter-spacing: 0.5px;">電子郵件 <span style="color: #b8b0a0;">*</span></label>
+                        <input type="email" id="contactEmail" placeholder="votre@email.com" style="width: 100%; padding: 12px 14px; border: 1px solid #e0ddd8; background: white; font-family: inherit; transition: border-color 0.2s;">
                     </div>
-                    <div style="margin-bottom: 20px;">
-                        <label style="display: block; font-size: 13px; color: #6b6b6b; margin-bottom: 8px;">您的問題 / 建議 *</label>
-                        <textarea id="contactMessage" rows="5" placeholder="請告訴我們您的想法..." style="width: 100%; padding: 12px; border: 1px solid #e0ddd8; background: white; font-family: inherit;"></textarea>
+                    <div style="margin-bottom: 24px;">
+                        <label style="display: block; font-size: 13px; color: #6b6b6b; margin-bottom: 8px; letter-spacing: 0.5px;">您的問題 / 建議 <span style="color: #b8b0a0;">*</span></label>
+                        <textarea id="contactMessage" rows="5" placeholder="告訴我們您的想法或學習問題⋯" style="width: 100%; padding: 12px 14px; border: 1px solid #e0ddd8; background: white; font-family: inherit; resize: vertical;"></textarea>
                     </div>
-                    <button id="contactSubmitBtn" style="background: transparent; border: 1px solid #e0ddd8; padding: 12px 28px; cursor: pointer; color: #6b6b6b; width: 100%;">送出訊息</button>
+                    <button id="contactSubmitBtn" style="background: transparent; border: 1px solid #cbc6bd; padding: 12px 28px; cursor: pointer; color: #6b6b6b; width: 100%; font-size: 14px; letter-spacing: 1px; transition: all 0.2s;">送出訊息</button>
                     <div id="contactFormStatus" style="margin-top: 16px; font-size: 12px; text-align: center; color: #8ba58b;"></div>
                 </div>
                 
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <div class="contact-icon">📧</div>
-                        <div><strong>電子郵件</strong><br>french.learning@example.com</div>
+                <!-- 裝飾點綴 -->
+                <div style="display: flex; gap: 8px; justify-content: center; margin: 24px 0 32px 0;">
+                    <span style="width: 6px; height: 6px; background: #e0ddd8; border-radius: 50%;"></span>
+                    <span style="width: 6px; height: 6px; background: #e0ddd8; border-radius: 50%;"></span>
+                    <span style="width: 6px; height: 6px; background: #e0ddd8; border-radius: 50%;"></span>
+                </div>
+                
+                <!-- 回覆時間資訊 -->
+                <div style="background: #faf8f5; padding: 20px 24px; border: 1px solid #efede9; margin-bottom: 32px;">
+                    <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px;">
+                        <span style="font-size: 24px;">💬</span>
+                        <div>
+                            <strong style="color: #5a5a5a;">回覆時間</strong><br>
+                            <span style="color: #9e9e9e; font-size: 13px;">我們會在 48 小時內回覆</span>
+                        </div>
                     </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">💬</div>
-                        <div><strong>回覆時間</strong><br>我們會在 48 小時內回覆</div>
+                    <div style="height: 1px; background: #efede9; margin: 12px 0;"></div>
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 24px;">⏰</span>
+                        <div>
+                            <strong style="color: #5a5a5a;">服務時間</strong><br>
+                            <span style="color: #9e9e9e; font-size: 13px;">週一至週五 10:00 - 18:00</span>
+                        </div>
                     </div>
                 </div>
                 
-                <h2>常見問題</h2>
-                <p><strong>❓ 學習進度會遺失嗎？</strong><br>您的學習進度儲存在瀏覽器的本地儲存中。如果您清除瀏覽器資料或更換裝置，進度將會遺失。建議定期截圖記錄。</p>
+                <!-- 常見問題 -->
+                <h2 style="color: #6b6b6b; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; margin: 32px 0 20px 0;">✧ 常見問題 ✧</h2>
                 
-                <p><strong>❓ 可以離線使用嗎？</strong><br>是的！首次載入後，您可以在沒有網路的環境下使用（發音功能需要網路）。</p>
+                <div style="border-top: 1px solid #efede9;">
+                    <div style="padding: 20px 0; border-bottom: 1px solid #efede9;">
+                        <div style="font-weight: 500; color: #5a5a5a; margin-bottom: 8px;">❓ 學習進度會遺失嗎？</div>
+                        <p style="color: #8b8b8b; font-size: 0.85rem; margin: 0; line-height: 1.5;">您的學習進度儲存在瀏覽器的本地儲存中。如果您清除瀏覽器資料或更換裝置，進度將會遺失。建議定期複習記錄。</p>
+                    </div>
+                    <div style="padding: 20px 0; border-bottom: 1px solid #efede9;">
+                        <div style="font-weight: 500; color: #5a5a5a; margin-bottom: 8px;">❓ 可以離線使用嗎？</div>
+                        <p style="color: #8b8b8b; font-size: 0.85rem; margin: 0; line-height: 1.5;">是的！首次載入後，您可以在沒有網路的環境下使用（發音功能需要網路）。</p>
+                    </div>
+                    <div style="padding: 20px 0; border-bottom: 1px solid #efede9;">
+                        <div style="font-weight: 500; color: #5a5a5a; margin-bottom: 8px;">❓ 如何新增自己的單字？</div>
+                        <p style="color: #8b8b8b; font-size: 0.85rem; margin: 0; line-height: 1.5;">在首頁底部的「新增內容」區塊，輸入法文和翻譯，點擊加入即可。</p>
+                    </div>
+                </div>
                 
-                <p><strong>❓ 如何新增自己的單字？</strong><br>在首頁底部的「新增內容」區塊，輸入法文和翻譯，點擊加入即可。</p>
-                
-                <p><strong>❓ 串字模式怎麼用？</strong><br>開啟頂部的「串字測驗模式」開關，系統會顯示中文翻譯，您需要輸入正確的法文拼寫。</p>
-                
-                <button class="back-to-home" onclick="showPage('main')">← 返回首頁</button>
+                <button class="back-to-home" onclick="showPage('main')" style="margin-top: 32px;">← 返回首頁</button>
             </div>
         </div>
     </div>
@@ -1213,10 +1219,6 @@
                 
                 statusDiv.innerHTML = `✓ 已收到您的訊息，我們會盡快回覆。<br>📧 ${email}<br>📝 ${message.substring(0, 80)}${message.length > 80 ? '…' : ''}`;
                 statusDiv.style.color = '#8ba58b';
-                
-                // 可選：清空表單
-                // document.getElementById('contactEmail').value = '';
-                // document.getElementById('contactMessage').value = '';
                 
                 console.log('聯絡表單:', { email, message });
             });
