@@ -17,6 +17,46 @@
             background-color: #faf9f7;
             min-height: 100vh;
             padding: 24px 16px;
+            position: relative;
+        }
+        
+        /* 背景裝飾 - 極簡三色點 */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 85, 164, 0.03) 1px, transparent 1px),
+                radial-gradient(circle at 85% 70%, rgba(239, 65, 53, 0.03) 1px, transparent 1px),
+                radial-gradient(circle at 40% 90%, rgba(255, 255, 255, 0.05) 2px, transparent 2px);
+            background-size: 40px 40px, 35px 35px, 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        /* 背景鐵塔剪影 */
+        body::after {
+            content: "🗼";
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            font-size: 100px;
+            opacity: 0.02;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .background-fleur {
+            position: fixed;
+            top: 50px;
+            left: 30px;
+            font-size: 70px;
+            opacity: 0.02;
+            pointer-events: none;
+            z-index: 0;
         }
         
         /* 法國三色裝飾條 */
@@ -42,6 +82,7 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.03);
             border: 1px solid #efede9;
             position: relative;
+            z-index: 1;
         }
         
         /* 頁面切換 */
@@ -178,6 +219,8 @@
             letter-spacing: 1px;
             color: #b8b0a0;
             font-style: italic;
+            text-align: center;
+            margin-bottom: 12px;
         }
         
         /* 串字模式開關 */
@@ -971,7 +1014,7 @@
     </style>
 </head>
 <body>
-    <!-- 法國三色裝飾條 -->
+    <div class="background-fleur">⚜️</div>
     <div class="french-stripe">
         <div class="stripe-blue"></div>
         <div class="stripe-white"></div>
@@ -979,14 +1022,13 @@
     </div>
     
     <div class="app">
-        <!-- 主頁面 - 法文學習工具 -->
+        <!-- 主頁面 -->
         <div id="mainPage" class="page active-page">
             <div class="lang-switch">
                 <button class="lang-btn active-lang" onclick="setLanguage('zh')">中文</button>
                 <button class="lang-btn" onclick="setLanguage('en')">English</button>
             </div>
             
-            <!-- 標題 + 法國國旗 -->
             <div class="title-with-flag">
                 <div class="french-flag-icon">
                     <div class="flag-dot blue"></div>
@@ -1130,39 +1172,10 @@
                 </div>
                 <h1>🔒 隱私政策</h1>
                 <p>最後更新日期：2025年3月</p>
-                
                 <h2>1. 我們收集的資訊</h2>
-                <p>輕鬆學法文（以下簡稱「本網站」）不會收集任何個人身份資訊。所有學習進度（包括您學會的單字、錯誤統計、每日目標等）都僅儲存在您裝置的本地儲存空間中，不會上傳到任何伺服器。</p>
-                
+                <p>輕鬆學法文（以下簡稱「本網站」）不會收集任何個人身份資訊。所有學習進度都僅儲存在您裝置的本地儲存空間中，不會上傳到任何伺服器。</p>
                 <h2>2. 本地儲存</h2>
-                <p>本網站使用瀏覽器的 localStorage 功能儲存您的學習進度。這些資料只存在於您的裝置中，我們無法訪問或獲取這些資料。如果您清除瀏覽器資料，您的學習進度將會被清除。</p>
-                
-                <h2>3. Cookie 使用</h2>
-                <p>本網站可能使用 Cookie 來改善您的使用體驗。您可以透過瀏覽器設定來管理或禁用 Cookie。</p>
-                
-                <h2>4. 第三方服務</h2>
-                <p>本網站使用以下第三方服務：</p>
-                <ul style="margin-left: 20px; margin-bottom: 12px;">
-                    <li><strong>Web Speech API</strong>：用於提供法文發音功能。語音資料僅在您的裝置上處理，不會傳送到伺服器。</li>
-                </ul>
-                
-                <h2>5. 外部連結</h2>
-                <p>本網站可能包含指向其他網站的連結。我們對這些網站的隱私實踐不負任何責任，建議您查閱這些網站的隱私政策。</p>
-                
-                <h2>6. 兒童隱私</h2>
-                <p>本網站適合所有年齡層使用。我們不會有意收集任何年齡用戶的個人資訊。</p>
-                
-                <h2>7. 政策變更</h2>
-                <p>我們可能會不定期更新本隱私政策。任何變更將在此頁面公布，建議您定期查看。</p>
-                
-                <h2>8. 聯絡我們</h2>
-                <p>如果您對本隱私政策有任何疑問，請透過「聯絡我們」頁面與我們聯繫。</p>
-                
-                <div class="french-divider">
-                    <span class="divider-line"></span>
-                    <span class="fleur-icon">⚜️</span>
-                    <span class="divider-line"></span>
-                </div>
+                <p>本網站使用瀏覽器的 localStorage 功能儲存您的學習進度。這些資料只存在於您的裝置中，我們無法訪問或獲取這些資料。</p>
                 <button class="back-to-home" onclick="showPage('main')">← 返回首頁</button>
             </div>
         </div>
@@ -1176,48 +1189,13 @@
                     <span class="divider-line"></span>
                 </div>
                 <h1>🇫🇷 關於我們</h1>
-                
                 <h2>我們的使命</h2>
-                <p>讓法文學習變得簡單、有趣、免費！我們相信每個人都應該有機會學習新的語言，而不被昂貴的課程費用阻礙。輕鬆學法文致力於提供高品質、完全免費的法文學習工具，幫助全球使用者掌握法文。</p>
-                
-                <h2>我們的特色</h2>
+                <p>讓法文學習變得簡單、有趣、免費！</p>
                 <div class="feature-list">
-                    <div class="feature-card">
-                        <div>✍️</div>
-                        <strong>串字測驗</strong><br>看中文，打法文
-                    </div>
-                    <div class="feature-card">
-                        <div>🎭</div>
-                        <strong>動詞變化</strong><br>8人稱完整變化
-                    </div>
-                    <div class="feature-card">
-                        <div>🔊</div>
-                        <strong>例句發音</strong><br>標準法語發音
-                    </div>
-                    <div class="feature-card">
-                        <div>📊</div>
-                        <strong>學習統計</strong><br>追蹤學習進度
-                    </div>
-                </div>
-                
-                <h2>我們的承諾</h2>
-                <p>✅ 永遠免費 - 所有核心功能完全免費使用<br>
-                ✅ 無需註冊 - 打開即用，不收集個人資訊<br>
-                ✅ 持續更新 - 定期新增單字和功能<br>
-                ✅ 離線可用 - 學習進度儲存在您的裝置中</p>
-                
-                <h2>支援我們</h2>
-                <p>如果您喜歡我們的平台，可以透過以下方式支持我們：</p>
-                <ul>
-                    <li>📢 分享給更多學習法文的朋友</li>
-                    <li>⭐ 在社交媒體上推薦我們</li>
-                    <li>💡 提供建議幫助我們改進</li>
-                </ul>
-                
-                <div class="french-divider">
-                    <span class="divider-line"></span>
-                    <span class="fleur-icon">⚜️</span>
-                    <span class="divider-line"></span>
+                    <div class="feature-card"><div>✍️</div><strong>串字測驗</strong><br>看中文，打法文</div>
+                    <div class="feature-card"><div>🎭</div><strong>動詞變化</strong><br>8人稱完整變化</div>
+                    <div class="feature-card"><div>🔊</div><strong>例句發音</strong><br>標準法語發音</div>
+                    <div class="feature-card"><div>📊</div><strong>學習統計</strong><br>追蹤學習進度</div>
                 </div>
                 <button class="back-to-home" onclick="showPage('main')">← 返回首頁</button>
             </div>
@@ -1231,75 +1209,21 @@
                     <span class="fleur-icon">⚜️</span>
                     <span class="divider-line"></span>
                 </div>
-                
-                <h1 style="margin-top: 0;">📧 聯絡我們</h1>
-                <p style="color: #8b8b8b;">我們很樂意聽到您的聲音！無論是問題、建議還是回饋，都歡迎與我們聯絡。</p>
-                
-                <div style="height: 1px; background: linear-gradient(90deg, #efede9, #efede9, transparent); margin: 28px 0 32px 0;"></div>
-                
-                <!-- 聯絡表單 -->
+                <h1>📧 聯絡我們</h1>
+                <p>我們很樂意聽到您的聲音！無論是問題、建議還是回饋，都歡迎與我們聯絡。</p>
                 <div style="background: #ffffff; padding: 28px; border: 1px solid #efede9; margin-bottom: 32px;">
                     <div style="margin-bottom: 24px;">
-                        <label style="display: block; font-size: 13px; color: #6b6b6b; margin-bottom: 8px; letter-spacing: 0.5px;">電子郵件 <span style="color: #b8b0a0;">*</span></label>
-                        <input type="email" id="contactEmail" placeholder="votre@email.com" style="width: 100%; padding: 12px 14px; border: 1px solid #e0ddd8; background: white; font-family: inherit;">
+                        <label style="display: block; font-size: 13px; color: #6b6b6b; margin-bottom: 8px;">電子郵件 *</label>
+                        <input type="email" id="contactEmail" placeholder="votre@email.com" style="width: 100%; padding: 12px 14px; border: 1px solid #e0ddd8; background: white;">
                     </div>
                     <div style="margin-bottom: 24px;">
-                        <label style="display: block; font-size: 13px; color: #6b6b6b; margin-bottom: 8px; letter-spacing: 0.5px;">您的問題 / 建議 <span style="color: #b8b0a0;">*</span></label>
-                        <textarea id="contactMessage" rows="5" placeholder="告訴我們您的想法或學習問題⋯" style="width: 100%; padding: 12px 14px; border: 1px solid #e0ddd8; background: white; font-family: inherit; resize: vertical;"></textarea>
+                        <label style="display: block; font-size: 13px; color: #6b6b6b; margin-bottom: 8px;">您的問題 / 建議 *</label>
+                        <textarea id="contactMessage" rows="5" placeholder="告訴我們您的想法..." style="width: 100%; padding: 12px 14px; border: 1px solid #e0ddd8; background: white;"></textarea>
                     </div>
-                    <button id="contactSubmitBtn" style="background: transparent; border: 1px solid #cbc6bd; padding: 12px 28px; cursor: pointer; color: #6b6b6b; width: 100%; font-size: 14px; letter-spacing: 1px;">送出訊息</button>
+                    <button id="contactSubmitBtn" style="background: transparent; border: 1px solid #cbc6bd; padding: 12px 28px; cursor: pointer; color: #6b6b6b; width: 100%;">送出訊息</button>
                     <div id="contactFormStatus" style="margin-top: 16px; font-size: 12px; text-align: center; color: #8ba58b;"></div>
                 </div>
-                
-                <div style="display: flex; gap: 8px; justify-content: center; margin: 24px 0 32px 0;">
-                    <span style="width: 6px; height: 6px; background: #e0ddd8; border-radius: 50%;"></span>
-                    <span style="width: 6px; height: 6px; background: #e0ddd8; border-radius: 50%;"></span>
-                    <span style="width: 6px; height: 6px; background: #e0ddd8; border-radius: 50%;"></span>
-                </div>
-                
-                <!-- 回覆時間資訊 -->
-                <div style="background: #faf8f5; padding: 20px 24px; border: 1px solid #efede9; margin-bottom: 32px;">
-                    <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px;">
-                        <span style="font-size: 24px;">💬</span>
-                        <div>
-                            <strong style="color: #5a5a5a;">回覆時間</strong><br>
-                            <span style="color: #9e9e9e; font-size: 13px;">我們會在 48 小時內回覆</span>
-                        </div>
-                    </div>
-                    <div style="height: 1px; background: #efede9; margin: 12px 0;"></div>
-                    <div style="display: flex; align-items: center; gap: 14px;">
-                        <span style="font-size: 24px;">⏰</span>
-                        <div>
-                            <strong style="color: #5a5a5a;">服務時間</strong><br>
-                            <span style="color: #9e9e9e; font-size: 13px;">週一至週五 10:00 - 18:00</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 常見問題 -->
-                <h2 style="color: #6b6b6b; font-size: 1.1rem; font-weight: 400; letter-spacing: 1px; margin: 32px 0 20px 0;">✧ 常見問題 ✧</h2>
-                
-                <div style="border-top: 1px solid #efede9;">
-                    <div style="padding: 20px 0; border-bottom: 1px solid #efede9;">
-                        <div style="font-weight: 500; color: #5a5a5a; margin-bottom: 8px;">❓ 學習進度會遺失嗎？</div>
-                        <p style="color: #8b8b8b; font-size: 0.85rem; margin: 0; line-height: 1.5;">您的學習進度儲存在瀏覽器的本地儲存中。如果您清除瀏覽器資料或更換裝置，進度將會遺失。建議定期複習記錄。</p>
-                    </div>
-                    <div style="padding: 20px 0; border-bottom: 1px solid #efede9;">
-                        <div style="font-weight: 500; color: #5a5a5a; margin-bottom: 8px;">❓ 可以離線使用嗎？</div>
-                        <p style="color: #8b8b8b; font-size: 0.85rem; margin: 0; line-height: 1.5;">是的！首次載入後，您可以在沒有網路的環境下使用（發音功能需要網路）。</p>
-                    </div>
-                    <div style="padding: 20px 0; border-bottom: 1px solid #efede9;">
-                        <div style="font-weight: 500; color: #5a5a5a; margin-bottom: 8px;">❓ 如何新增自己的單字？</div>
-                        <p style="color: #8b8b8b; font-size: 0.85rem; margin: 0; line-height: 1.5;">在首頁底部的「新增內容」區塊，輸入法文和翻譯，點擊加入即可。</p>
-                    </div>
-                </div>
-                
-                <div class="french-divider">
-                    <span class="divider-line"></span>
-                    <span class="fleur-icon">⚜️</span>
-                    <span class="divider-line"></span>
-                </div>
-                <button class="back-to-home" onclick="showPage('main')" style="margin-top: 32px;">← 返回首頁</button>
+                <button class="back-to-home" onclick="showPage('main')">← 返回首頁</button>
             </div>
         </div>
     </div>
@@ -1318,82 +1242,56 @@
         function setupContactForm() {
             const submitBtn = document.getElementById('contactSubmitBtn');
             if (!submitBtn) return;
-            
             submitBtn.addEventListener('click', function() {
                 const email = document.getElementById('contactEmail').value.trim();
                 const message = document.getElementById('contactMessage').value.trim();
                 const statusDiv = document.getElementById('contactFormStatus');
-                
-                if (!email) {
-                    statusDiv.innerHTML = '✧ 請填寫電子郵件 ✧';
+                if (!email || !message) {
+                    statusDiv.innerHTML = '✧ 請填寫所有欄位 ✧';
                     statusDiv.style.color = '#b57c6e';
                     return;
                 }
-                if (!message) {
-                    statusDiv.innerHTML = '✧ 請填寫您的問題 ✧';
-                    statusDiv.style.color = '#b57c6e';
-                    return;
-                }
-                if (!email.includes('@') || !email.includes('.')) {
+                if (!email.includes('@')) {
                     statusDiv.innerHTML = '✧ 請輸入有效的電子郵件地址 ✧';
                     statusDiv.style.color = '#b57c6e';
                     return;
                 }
-                
-                statusDiv.innerHTML = `✓ 已收到您的訊息，我們會盡快回覆。<br>📧 ${email}<br>📝 ${message.substring(0, 80)}${message.length > 80 ? '…' : ''}`;
+                statusDiv.innerHTML = `✓ 已收到您的訊息，我們會盡快回覆。`;
                 statusDiv.style.color = '#8ba58b';
-                
-                console.log('聯絡表單:', { email, message });
             });
         }
         
         // ========== 語言文字庫 ==========
         const texts = {
             zh: {
-                mainTitle: "🇫🇷 輕鬆學法文",
-                mainSub: "✍️ 串字測驗 • 看中文，打法文！",
-                spellingToggle: "✍️ 串字測驗模式",
-                tabLearn: "學習", tabReview: "複習錯字", tabStats: "統計",
-                goalTitle: "🎯 今日目標", setGoal: "設定目標",
-                todayNew: "📖 今日新學:", todayReview: "🔄 今日複習:",
+                mainTitle: "🇫🇷 輕鬆學法文", mainSub: "✍️ 串字測驗 • 看中文，打法文！",
+                spellingToggle: "✍️ 串字測驗模式", tabLearn: "學習", tabReview: "複習錯字", tabStats: "統計",
+                goalTitle: "🎯 今日目標", setGoal: "設定目標", todayNew: "📖 今日新學:", todayReview: "🔄 今日複習:",
                 statTotal: "總項目", statMastered: "已學會", statError: "待複習", statAccuracy: "正確率",
-                resetAll: "🔄 重置所有統計", addTitle: "➕ 新增內容",
-                typeWord: "單字", typeVerb: "動詞", typePhrase: "詞組",
+                resetAll: "🔄 重置所有統計", addTitle: "➕ 新增內容", typeWord: "單字", typeVerb: "動詞", typePhrase: "詞組",
                 addBtn: "➕ 加入學習庫", needReview: "❌ 錯了 / 不熟", correct: "✅ 正確 / 學會了",
-                resetSession: "🔄 重置本輪進度", flipHint: "👆 點擊翻轉",
-                showConjugation: "📊 查看動詞變化 (8人稱)", hideConjugation: "返回單字",
-                noReview: "✅ 沒有需要複習的錯誤！繼續加油！",
+                resetSession: "🔄 重置本輪進度", flipHint: "👆 點擊翻轉", showConjugation: "📊 查看動詞變化",
+                hideConjugation: "返回單字", noReview: "✅ 沒有需要複習的錯誤！",
                 restartSameLevel: "🔄 重新開始此等級", restartAll: "📚 重置所有等級",
-                spellingQuestion: "✍️ 請拼寫出以下單字",
-                spellingHint: "請輸入法文拼寫",
+                spellingQuestion: "✍️ 請拼寫出以下單字", spellingHint: "請輸入法文拼寫",
                 checkAnswer: "✓ 檢查答案", skipWord: "⏭ 跳過 / 顯示答案",
-                spellingCorrect: "✅ 正確！繼續加油！",
-                spellingWrong: "❌ 錯誤！正確答案是：",
-                spellingStats: "📊 串字統計: 正確 {correct} / 總共 {total}",
-                exampleTitle: "📖 例句"
+                spellingCorrect: "✅ 正確！繼續加油！", spellingWrong: "❌ 錯誤！正確答案是：",
+                spellingStats: "📊 串字統計: 正確 {correct} / 總共 {total}", exampleTitle: "📖 例句"
             },
             en: {
-                mainTitle: "🇫🇷 Learn French Easily",
-                mainSub: "✍️ Spelling Test • See English, Type French!",
-                spellingToggle: "✍️ Spelling Test Mode",
-                tabLearn: "Learn", tabReview: "Review Errors", tabStats: "Stats",
-                goalTitle: "🎯 Daily Goal", setGoal: "Set Goal",
-                todayNew: "📖 New Today:", todayReview: "🔄 Reviewed Today:",
+                mainTitle: "🇫🇷 Learn French Easily", mainSub: "✍️ Spelling Test • See English, Type French!",
+                spellingToggle: "✍️ Spelling Test Mode", tabLearn: "Learn", tabReview: "Review Errors", tabStats: "Stats",
+                goalTitle: "🎯 Daily Goal", setGoal: "Set Goal", todayNew: "📖 New Today:", todayReview: "🔄 Reviewed Today:",
                 statTotal: "Total Items", statMastered: "Mastered", statError: "To Review", statAccuracy: "Accuracy",
-                resetAll: "🔄 Reset All Stats", addTitle: "➕ Add Content",
-                typeWord: "Word", typeVerb: "Verb", typePhrase: "Phrase",
+                resetAll: "🔄 Reset All Stats", addTitle: "➕ Add Content", typeWord: "Word", typeVerb: "Verb", typePhrase: "Phrase",
                 addBtn: "➕ Add to Library", needReview: "❌ Wrong", correct: "✅ Correct",
-                resetSession: "🔄 Reset Session", flipHint: "👆 Tap to flip",
-                showConjugation: "📊 View Conjugation", hideConjugation: "Back",
-                noReview: "✅ Nothing to review!",
+                resetSession: "🔄 Reset Session", flipHint: "👆 Tap to flip", showConjugation: "📊 View Conjugation",
+                hideConjugation: "Back", noReview: "✅ Nothing to review!",
                 restartSameLevel: "🔄 Restart Level", restartAll: "📚 Reset All",
-                spellingQuestion: "✍️ Spell the word:",
-                spellingHint: "Type the French spelling",
+                spellingQuestion: "✍️ Spell the word:", spellingHint: "Type the French spelling",
                 checkAnswer: "✓ Check Answer", skipWord: "⏭ Skip / Show Answer",
-                spellingCorrect: "✅ Correct! Well done!",
-                spellingWrong: "❌ Wrong! Correct answer: ",
-                spellingStats: "📊 Spelling Stats: {correct} / {total} correct",
-                exampleTitle: "📖 Example"
+                spellingCorrect: "✅ Correct! Well done!", spellingWrong: "❌ Wrong! Correct answer: ",
+                spellingStats: "📊 Spelling Stats: {correct} / {total} correct", exampleTitle: "📖 Example"
             }
         };
         
@@ -1429,32 +1327,21 @@
         
         // ========== 動詞變化引擎 ==========
         const irregularDB = {
-            'être': {
-                present: { je: 'suis', tu: 'es', il: 'est', elle: 'est', nous: 'sommes', vous: 'êtes', ils: 'sont', elles: 'sont' },
-                imparfait: { je: 'étais', tu: 'étais', il: 'était', elle: 'était', nous: 'étions', vous: 'étiez', ils: 'étaient', elles: 'étaient' },
-                futur: { je: 'serai', tu: 'seras', il: 'sera', elle: 'sera', nous: 'serons', vous: 'serez', ils: 'seront', elles: 'seront' }
-            },
-            'avoir': {
-                present: { je: 'ai', tu: 'as', il: 'a', elle: 'a', nous: 'avons', vous: 'avez', ils: 'ont', elles: 'ont' },
-                imparfait: { je: 'avais', tu: 'avais', il: 'avait', elle: 'avait', nous: 'avions', vous: 'aviez', ils: 'avaient', elles: 'avaient' },
-                futur: { je: 'aurai', tu: 'auras', il: 'aura', elle: 'aura', nous: 'aurons', vous: 'aurez', ils: 'auront', elles: 'auront' }
-            },
-            'aller': {
-                present: { je: 'vais', tu: 'vas', il: 'va', elle: 'va', nous: 'allons', vous: 'allez', ils: 'vont', elles: 'vont' },
-                imparfait: { je: 'allais', tu: 'allais', il: 'allait', elle: 'allait', nous: 'allions', vous: 'alliez', ils: 'allaient', elles: 'allaient' },
-                futur: { je: 'irai', tu: 'iras', il: 'ira', elle: 'ira', nous: 'irons', vous: 'irez', ils: 'iront', elles: 'iront' }
-            },
-            'faire': {
-                present: { je: 'fais', tu: 'fais', il: 'fait', elle: 'fait', nous: 'faisons', vous: 'faites', ils: 'font', elles: 'font' },
-                imparfait: { je: 'faisais', tu: 'faisais', il: 'faisait', elle: 'faisait', nous: 'faisions', vous: 'faisiez', ils: 'faisaient', elles: 'faisaient' },
-                futur: { je: 'ferai', tu: 'feras', il: 'fera', elle: 'fera', nous: 'ferons', vous: 'ferez', ils: 'feront', elles: 'feront' }
-            }
+            'être': { present: { je: 'suis', tu: 'es', il: 'est', elle: 'est', nous: 'sommes', vous: 'êtes', ils: 'sont', elles: 'sont' }, imparfait: { je: 'étais', tu: 'étais', il: 'était', elle: 'était', nous: 'étions', vous: 'étiez', ils: 'étaient', elles: 'étaient' }, futur: { je: 'serai', tu: 'seras', il: 'sera', elle: 'sera', nous: 'serons', vous: 'serez', ils: 'seront', elles: 'seront' } },
+            'avoir': { present: { je: 'ai', tu: 'as', il: 'a', elle: 'a', nous: 'avons', vous: 'avez', ils: 'ont', elles: 'ont' }, imparfait: { je: 'avais', tu: 'avais', il: 'avait', elle: 'avait', nous: 'avions', vous: 'aviez', ils: 'avaient', elles: 'avaient' }, futur: { je: 'aurai', tu: 'auras', il: 'aura', elle: 'aura', nous: 'aurons', vous: 'aurez', ils: 'auront', elles: 'auront' } },
+            'aller': { present: { je: 'vais', tu: 'vas', il: 'va', elle: 'va', nous: 'allons', vous: 'allez', ils: 'vont', elles: 'vont' }, imparfait: { je: 'allais', tu: 'allais', il: 'allait', elle: 'allait', nous: 'allions', vous: 'alliez', ils: 'allaient', elles: 'allaient' }, futur: { je: 'irai', tu: 'iras', il: 'ira', elle: 'ira', nous: 'irons', vous: 'irez', ils: 'iront', elles: 'iront' } },
+            'faire': { present: { je: 'fais', tu: 'fais', il: 'fait', elle: 'fait', nous: 'faisons', vous: 'faites', ils: 'font', elles: 'font' }, imparfait: { je: 'faisais', tu: 'faisais', il: 'faisait', elle: 'faisait', nous: 'faisions', vous: 'faisiez', ils: 'faisaient', elles: 'faisaient' }, futur: { je: 'ferai', tu: 'feras', il: 'fera', elle: 'fera', nous: 'ferons', vous: 'ferez', ils: 'feront', elles: 'feront' } },
+            'prendre': { present: { je: 'prends', tu: 'prends', il: 'prend', elle: 'prend', nous: 'prenons', vous: 'prenez', ils: 'prennent', elles: 'prennent' }, imparfait: { je: 'prenais', tu: 'prenais', il: 'prenait', elle: 'prenait', nous: 'prenions', vous: 'preniez', ils: 'prenaient', elles: 'prenaient' }, futur: { je: 'prendrai', tu: 'prendras', il: 'prendra', elle: 'prendra', nous: 'prendrons', vous: 'prendrez', ils: 'prendront', elles: 'prendront' } },
+            'vouloir': { present: { je: 'veux', tu: 'veux', il: 'veut', elle: 'veut', nous: 'voulons', vous: 'voulez', ils: 'veulent', elles: 'veulent' }, imparfait: { je: 'voulais', tu: 'voulais', il: 'voulait', elle: 'voulait', nous: 'voulions', vous: 'vouliez', ils: 'voulaient', elles: 'voulaient' }, futur: { je: 'voudrai', tu: 'voudras', il: 'voudra', elle: 'voudra', nous: 'voudrons', vous: 'voudrez', ils: 'voudront', elles: 'voudront' } },
+            'pouvoir': { present: { je: 'peux', tu: 'peux', il: 'peut', elle: 'peut', nous: 'pouvons', vous: 'pouvez', ils: 'peuvent', elles: 'peuvent' }, imparfait: { je: 'pouvais', tu: 'pouvais', il: 'pouvait', elle: 'pouvait', nous: 'pouvions', vous: 'pouviez', ils: 'pouvaient', elles: 'pouvaient' }, futur: { je: 'pourrai', tu: 'pourras', il: 'pourra', elle: 'pourra', nous: 'pourrons', vous: 'pourrez', ils: 'pourront', elles: 'pourront' } },
+            'devoir': { present: { je: 'dois', tu: 'dois', il: 'doit', elle: 'doit', nous: 'devons', vous: 'devez', ils: 'doivent', elles: 'doivent' }, imparfait: { je: 'devais', tu: 'devais', il: 'devait', elle: 'devait', nous: 'devions', vous: 'deviez', ils: 'devaient', elles: 'devaient' }, futur: { je: 'devrai', tu: 'devras', il: 'devra', elle: 'devra', nous: 'devrons', vous: 'devrez', ils: 'devront', elles: 'devront' } },
+            'venir': { present: { je: 'viens', tu: 'viens', il: 'vient', elle: 'vient', nous: 'venons', vous: 'venez', ils: 'viennent', elles: 'viennent' }, imparfait: { je: 'venais', tu: 'venais', il: 'venait', elle: 'venait', nous: 'venions', vous: 'veniez', ils: 'venaient', elles: 'venaient' }, futur: { je: 'viendrai', tu: 'viendras', il: 'viendra', elle: 'viendra', nous: 'viendrons', vous: 'viendrez', ils: 'viendront', elles: 'viendront' } }
         };
         
         function getVerbConjugation(verb) {
             const v = verb.toLowerCase();
             if (irregularDB[v]) return { verbType: currentLang === 'zh' ? '不規則動詞' : 'Irregular Verb', ...irregularDB[v] };
-            if (v.endsWith('er') && !['aller', 'être', 'avoir', 'faire'].includes(v)) {
+            if (v.endsWith('er') && !['aller', 'être', 'avoir', 'faire', 'prendre', 'vouloir', 'pouvoir', 'devoir', 'venir'].includes(v)) {
                 const stem = v.slice(0, -2);
                 return {
                     verbType: currentLang === 'zh' ? '第一組動詞 (-er)' : 'Group 1 Verb (-er)',
@@ -1475,9 +1362,10 @@
             speechSynthesis.speak(utterance);
         }
         
-        // 預設資料
+        // ========== 預設單字庫 (包含所有新增單字) ==========
         function getDefaultItems() {
             return [
+                // 原有 A1 單字
                 { id: 1001, french: "parler", english: "說話", type: "verb", level: "A1", known: false, errorCount: 0, example: "Je parle français.", exampleTrans: "我講法文。" },
                 { id: 1002, french: "manger", english: "吃", type: "verb", level: "A1", known: false, errorCount: 0, example: "Je mange une pomme.", exampleTrans: "我吃一個蘋果。" },
                 { id: 1003, french: "être", english: "是", type: "verb", level: "A1", known: false, errorCount: 0, example: "Je suis étudiant.", exampleTrans: "我是學生。" },
@@ -1485,16 +1373,43 @@
                 { id: 1005, french: "aller", english: "去", type: "verb", level: "A1", known: false, errorCount: 0, example: "Je vais à l'école.", exampleTrans: "我去學校。" },
                 { id: 1006, french: "Bonjour", english: "你好", type: "word", level: "A1", known: false, errorCount: 0, example: "Bonjour!", exampleTrans: "你好！" },
                 { id: 1007, french: "Merci", english: "謝謝", type: "word", level: "A1", known: false, errorCount: 0, example: "Merci beaucoup!", exampleTrans: "非常感謝！" },
-                { id: 1008, french: "Au revoir", english: "再見", type: "word", level: "A1", known: false, errorCount: 0, example: "Au revoir, à demain!", exampleTrans: "再見，明天見！" }
+                { id: 1008, french: "Au revoir", english: "再見", type: "word", level: "A1", known: false, errorCount: 0, example: "Au revoir, à demain!", exampleTrans: "再見，明天見！" },
+                // 新增 A1 單字
+                { id: 1009, french: "oui", english: "是", type: "word", level: "A1", known: false, errorCount: 0, example: "Oui, je comprends.", exampleTrans: "是的，我懂。" },
+                { id: 1010, french: "non", english: "不是", type: "word", level: "A1", known: false, errorCount: 0, example: "Non, merci.", exampleTrans: "不用了，謝謝。" },
+                { id: 1011, french: "s'il vous plaît", english: "請", type: "phrase", level: "A1", known: false, errorCount: 0, example: "Un café, s'il vous plaît.", exampleTrans: "一杯咖啡，麻煩您。" },
+                { id: 1012, french: "désolé", english: "抱歉", type: "word", level: "A1", known: false, errorCount: 0, example: "Je suis désolé.", exampleTrans: "我很抱歉。" },
+                { id: 1013, french: "comment", english: "如何 / 怎麼", type: "word", level: "A1", known: false, errorCount: 0, example: "Comment ça va?", exampleTrans: "你好嗎？" },
+                { id: 1014, french: "pourquoi", english: "為什麼", type: "word", level: "A1", known: false, errorCount: 0, example: "Pourquoi tu es triste?", exampleTrans: "你為什麼難過？" },
+                { id: 1015, french: "Quelle heure est-il?", english: "現在幾點？", type: "phrase", level: "A1", known: false, errorCount: 0, example: "Excusez-moi, quelle heure est-il?", exampleTrans: "不好意思，現在幾點？" },
+                { id: 1016, french: "Je ne comprends pas", english: "我不懂", type: "phrase", level: "A1", known: false, errorCount: 0, example: "Parlez lentement, je ne comprends pas.", exampleTrans: "請說慢一點，我不懂。" },
+                { id: 1017, french: "Où sont les toilettes?", english: "廁所在哪裡？", type: "phrase", level: "A1", known: false, errorCount: 0, example: "S'il vous plaît, où sont les toilettes?", exampleTrans: "請問廁所在哪裡？" },
+                { id: 1018, french: "Combien ça coûte?", english: "這個多少錢？", type: "phrase", level: "A1", known: false, errorCount: 0, example: "Combien ça coûte, s'il vous plaît?", exampleTrans: "請問這個多少錢？" },
+                // A2 單字
+                { id: 2001, french: "heureux", english: "快樂的", type: "word", level: "A2", known: false, errorCount: 0, example: "Je suis heureux.", exampleTrans: "我很開心。" },
+                { id: 2002, french: "triste", english: "難過的", type: "word", level: "A2", known: false, errorCount: 0, example: "Elle est triste.", exampleTrans: "她很傷心。" },
+                { id: 2003, french: "grand", english: "大的 / 高大的", type: "word", level: "A2", known: false, errorCount: 0, example: "Il est grand.", exampleTrans: "他很高。" },
+                { id: 2004, french: "petit", english: "小的", type: "word", level: "A2", known: false, errorCount: 0, example: "C'est un petit chat.", exampleTrans: "這是一隻小貓。" },
+                { id: 2005, french: "beau", english: "美麗的", type: "word", level: "A2", known: false, errorCount: 0, example: "C'est un beau paysage.", exampleTrans: "這是美麗的風景。" },
+                { id: 2006, french: "cher", english: "親愛的 / 昂貴的", type: "word", level: "A2", known: false, errorCount: 0, example: "C'est trop cher.", exampleTrans: "太貴了。" },
+                { id: 2007, french: "chaud", english: "熱的", type: "word", level: "A2", known: false, errorCount: 0, example: "Il fait chaud.", exampleTrans: "天氣很熱。" },
+                { id: 2008, french: "froid", english: "冷的", type: "word", level: "A2", known: false, errorCount: 0, example: "Il fait froid.", exampleTrans: "天氣很冷。" },
+                // A2 動詞
+                { id: 2009, french: "prendre", english: "拿 / 吃 / 搭乘", type: "verb", level: "A2", known: false, errorCount: 0, example: "Je prends le train.", exampleTrans: "我搭火車。" },
+                { id: 2010, french: "vouloir", english: "想要", type: "verb", level: "A2", known: false, errorCount: 0, example: "Je veux un café.", exampleTrans: "我想要一杯咖啡。" },
+                { id: 2011, french: "pouvoir", english: "能夠", type: "verb", level: "A2", known: false, errorCount: 0, example: "Je peux vous aider?", exampleTrans: "我能幫您嗎？" },
+                { id: 2012, french: "devoir", english: "必須 / 應該", type: "verb", level: "A2", known: false, errorCount: 0, example: "Je dois travailler.", exampleTrans: "我必須工作。" },
+                { id: 2013, french: "venir", english: "來", type: "verb", level: "A2", known: false, errorCount: 0, example: "Je viens de Paris.", exampleTrans: "我從巴黎來。" },
+                { id: 2014, french: "faire", english: "做", type: "verb", level: "A2", known: false, errorCount: 0, example: "Je fais du sport.", exampleTrans: "我做運動。" },
+                // B1 連接詞
+                { id: 3001, french: "cependant", english: "然而", type: "word", level: "B1", known: false, errorCount: 0, example: "Cependant, ce n'est pas facile.", exampleTrans: "然而，這並不容易。" },
+                { id: 3002, french: "donc", english: "因此 / 所以", type: "word", level: "B1", known: false, errorCount: 0, example: "Donc, je pars.", exampleTrans: "所以，我走了。" },
+                { id: 3003, french: "bien que", english: "雖然", type: "phrase", level: "B1", known: false, errorCount: 0, example: "Bien qu'il pleuve, je sors.", exampleTrans: "雖然下雨，我還是出門。" },
+                { id: 3004, french: "car", english: "因為", type: "word", level: "B1", known: false, errorCount: 0, example: "Je reste car il pleut.", exampleTrans: "我留下因為下雨。" },
+                { id: 3005, french: "puisque", english: "既然", type: "word", level: "B1", known: false, errorCount: 0, example: "Puisque tu es là, reste.", exampleTrans: "既然你在這，留下吧。" }
             ];
         }
-        { id: 1009, french: "oui", english: "是", type: "word", level: "A1", known: false, errorCount: 0, example: "Oui, je comprends.", exampleTrans: "是的，我懂。" },
-        { id: 1010, french: "non", english: "不是", type: "word", level: "A1", known: false, errorCount: 0, example: "Non, merci.", exampleTrans: "不用了，謝謝。" },
-        { id: 1011, french: "s'il vous plaît", english: "請", type: "phrase", level: "A1", known: false, errorCount: 0, example: "Un café, s'il vous plaît.", exampleTrans: "一杯咖啡，麻煩您。" },
-        { id: 1012, french: "désolé", english: "抱歉", type: "word", level: "A1", known: false, errorCount: 0, example: "Je suis désolé.", exampleTrans: "我很抱歉。" },
-        { id: 1013, french: "comment", english: "如何 / 怎麼", type: "word", level: "A1", known: false, errorCount: 0, example: "Comment ça va?", exampleTrans: "你好嗎？" },
-        { id: 1014, french: "pourquoi", english: "為什麼", type: "word", level: "A1", known: false, errorCount: 0, example: "Pourquoi tu es triste?", exampleTrans: "你為什麼難過？" },
-                
+        
         function loadData() {
             const saved = localStorage.getItem('frenchMasterFinal');
             if (saved) {
