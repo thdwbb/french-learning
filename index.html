@@ -14,18 +14,19 @@
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-color: #faf9f7;
             min-height: 100vh;
-            padding: 16px;
+            padding: 24px 16px;
         }
         
         .app {
-            max-width: 650px;
+            max-width: 700px;
             margin: 0 auto;
             background: white;
-            border-radius: 32px;
-            padding: 20px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            border: 1px solid #efede9;
         }
         
         /* 頁面切換 */
@@ -39,19 +40,21 @@
         
         .back-to-home {
             display: inline-block;
-            margin-top: 20px;
+            margin-top: 24px;
             padding: 10px 24px;
-            background: #8b5cf6;
-            color: white;
+            background: transparent;
+            color: #8b8b8b;
             border-radius: 40px;
             font-size: 14px;
             cursor: pointer;
-            border: none;
-            font-weight: 600;
+            border: 1px solid #e0ddd8;
+            font-weight: 400;
+            transition: all 0.2s;
         }
         
         .back-to-home:hover {
-            background: #6d28d9;
+            background: #f5f3f0;
+            border-color: #cbc6bd;
         }
         
         /* 頁面內容樣式 */
@@ -61,40 +64,45 @@
         
         .page-content h1 {
             font-size: 28px;
-            margin-bottom: 16px;
-            color: #1a1a2e;
+            margin-bottom: 20px;
+            color: #3a3a3a;
+            font-weight: 400;
+            letter-spacing: 1px;
         }
         
         .page-content h2 {
-            color: #667eea;
-            margin: 24px 0 12px 0;
-            font-size: 1.3rem;
+            color: #6b6b6b;
+            margin: 28px 0 12px 0;
+            font-size: 1.2rem;
+            font-weight: 400;
+            letter-spacing: 1px;
         }
         
         .page-content p {
-            color: #475569;
+            color: #6b6b6b;
             line-height: 1.6;
             margin-bottom: 12px;
+            font-size: 0.9rem;
         }
         
         .page-content ul {
             margin-left: 20px;
-            color: #475569;
+            color: #6b6b6b;
             line-height: 1.6;
         }
         
         .feature-list {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
             gap: 16px;
             margin: 20px 0;
         }
         
         .feature-card {
-            background: #f8fafc;
+            background: #faf8f5;
             padding: 16px;
-            border-radius: 16px;
             text-align: center;
+            border: 1px solid #efede9;
         }
         
         .feature-card div:first-child {
@@ -103,10 +111,10 @@
         }
         
         .contact-info {
-            background: #f8fafc;
+            background: #faf8f5;
             padding: 20px;
-            border-radius: 20px;
             margin: 20px 0;
+            border: 1px solid #efede9;
         }
         
         .contact-item {
@@ -114,7 +122,7 @@
             align-items: center;
             gap: 12px;
             padding: 12px 0;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid #efede9;
         }
         
         .contact-item:last-child {
@@ -131,52 +139,53 @@
             display: flex;
             justify-content: flex-end;
             gap: 8px;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
         }
         
         .lang-btn {
-            background: #f1f5f9;
-            border: none;
+            background: transparent;
+            border: 1px solid #e0ddd8;
             padding: 6px 14px;
             border-radius: 30px;
             font-size: 12px;
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
-            color: #64748b;
+            color: #8b8b8b;
             transition: all 0.2s;
         }
         
         .lang-btn.active-lang {
-            background: #667eea;
-            color: white;
+            background: #f0ede8;
+            color: #5a5a5a;
+            border-color: #cbc6bd;
         }
         
         /* 串字模式開關 */
         .spelling-toggle {
-            background: linear-gradient(135deg, #8b5cf6, #667eea);
+            background: #faf8f5;
             border-radius: 60px;
-            padding: 12px 16px;
+            padding: 12px 18px;
             margin-bottom: 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+            border: 1px solid #efede9;
         }
         
         .toggle-label {
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 15px;
-            font-weight: 600;
-            color: white;
+            font-size: 14px;
+            font-weight: 500;
+            color: #5a5a5a;
         }
         
         .toggle-switch {
             position: relative;
             display: inline-block;
-            width: 54px;
-            height: 28px;
+            width: 52px;
+            height: 26px;
         }
         
         .toggle-switch input {
@@ -192,7 +201,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: #cbd5e1;
+            background-color: #e0ddd8;
             transition: 0.3s;
             border-radius: 34px;
         }
@@ -200,8 +209,8 @@
         .toggle-slider:before {
             position: absolute;
             content: "";
-            height: 22px;
-            width: 22px;
+            height: 20px;
+            width: 20px;
             left: 3px;
             bottom: 3px;
             background-color: white;
@@ -210,7 +219,7 @@
         }
         
         input:checked + .toggle-slider {
-            background-color: #f59e0b;
+            background-color: #b8b0a0;
         }
         
         input:checked + .toggle-slider:before {
@@ -221,10 +230,11 @@
         .tabs {
             display: flex;
             gap: 8px;
-            margin-bottom: 16px;
-            background: #f1f5f9;
+            margin-bottom: 20px;
+            background: #faf8f5;
             padding: 6px;
             border-radius: 60px;
+            border: 1px solid #efede9;
         }
         
         .tab {
@@ -233,29 +243,32 @@
             padding: 10px 8px;
             border-radius: 40px;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 500;
             font-size: 13px;
-            color: #64748b;
+            color: #8b8b8b;
             transition: all 0.2s;
         }
         
         .tab.active {
             background: white;
-            color: #667eea;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            color: #5a5a5a;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border: 1px solid #efede9;
         }
         
         h1 {
             text-align: center;
             font-size: 26px;
-            color: #1a1a2e;
+            color: #3a3a3a;
+            font-weight: 400;
+            letter-spacing: 2px;
         }
         
         .sub {
             text-align: center;
-            color: #666;
+            color: #9e9e9e;
             font-size: 12px;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
         }
         
         /* 等級篩選器 */
@@ -263,75 +276,78 @@
             display: flex;
             gap: 8px;
             justify-content: center;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
         }
         
         .level-badge {
-            background: #e2e8f0;
+            background: #faf8f5;
             padding: 6px 14px;
             border-radius: 30px;
             font-size: 12px;
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
-            color: #475569;
+            color: #8b8b8b;
             transition: all 0.2s;
+            border: 1px solid #efede9;
         }
         
         .level-badge.active-level {
-            background: #667eea;
-            color: white;
+            background: #f0ede8;
+            color: #5a5a5a;
+            border-color: #cbc6bd;
         }
         
         /* 每日目標卡片 */
         .daily-goal-card {
-            background: linear-gradient(135deg, #fef3c7, #fde68a);
-            border-radius: 20px;
-            padding: 12px;
-            margin-bottom: 20px;
+            background: #faf8f5;
+            padding: 16px;
+            margin-bottom: 24px;
+            border: 1px solid #efede9;
         }
         
         .goal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
         }
         
         .goal-title {
-            font-weight: 700;
-            color: #92400e;
+            font-weight: 500;
+            color: #6b6b6b;
             font-size: 14px;
         }
         
         .goal-value {
             font-size: 20px;
-            font-weight: 700;
-            color: #b45309;
+            font-weight: 500;
+            color: #b8b0a0;
         }
         
         .goal-control {
             display: flex;
-            gap: 8px;
-            margin-top: 8px;
+            gap: 10px;
+            margin-top: 10px;
         }
         
         .goal-control input {
             flex: 1;
-            padding: 6px 10px;
-            border: 1px solid #f59e0b;
+            padding: 8px 12px;
+            border: 1px solid #e0ddd8;
             border-radius: 40px;
             text-align: center;
-            font-size: 12px;
+            font-size: 13px;
+            background: white;
         }
         
         .goal-control button {
-            background: #f59e0b;
-            color: white;
-            padding: 6px 12px;
+            background: transparent;
+            color: #8b8b8b;
+            padding: 8px 16px;
             border-radius: 40px;
-            font-size: 11px;
-            border: none;
+            font-size: 12px;
+            border: 1px solid #e0ddd8;
             cursor: pointer;
         }
         
@@ -339,26 +355,26 @@
         .stats-dashboard {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 12px;
+            margin-bottom: 24px;
         }
         
         .stat-card {
-            background: #f8fafc;
-            border-radius: 16px;
-            padding: 10px;
+            background: #faf8f5;
+            padding: 14px;
             text-align: center;
+            border: 1px solid #efede9;
         }
         
         .stat-number {
-            font-size: 24px;
-            font-weight: 700;
-            color: #667eea;
+            font-size: 26px;
+            font-weight: 500;
+            color: #b8b0a0;
         }
         
         .stat-label {
             font-size: 11px;
-            color: #64748b;
+            color: #9e9e9e;
         }
         
         /* 進度條 */
@@ -369,20 +385,20 @@
         .stats-row {
             display: flex;
             justify-content: space-between;
-            font-size: 11px;
-            color: #666;
+            font-size: 12px;
+            color: #8b8b8b;
             margin-bottom: 6px;
         }
         
         .progress-bar {
-            background: #e5e7eb;
+            background: #efede9;
             border-radius: 20px;
-            height: 6px;
+            height: 4px;
             overflow: hidden;
         }
         
         .progress-fill {
-            background: linear-gradient(90deg, #10b981, #34d399);
+            background: #cbc6bd;
             height: 100%;
             width: 0%;
             transition: width 0.3s;
@@ -390,33 +406,33 @@
         
         /* 閃卡 */
         .flashcard {
-            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
-            border-radius: 28px;
-            padding: 20px;
+            background: #faf8f5;
+            padding: 28px 20px;
             text-align: center;
             cursor: pointer;
             margin: 16px 0;
-            min-height: 350px;
+            min-height: 320px;
             display: flex;
             flex-direction: column;
             position: relative;
             transition: transform 0.1s;
+            border: 1px solid #efede9;
         }
         
         .flashcard:active {
-            transform: scale(0.98);
+            transform: scale(0.99);
         }
         
         .french {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #1e293b;
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: #3a3a3a;
         }
         
         .english {
-            font-size: 1.5rem;
-            font-weight: 500;
-            color: #475569;
+            font-size: 1.4rem;
+            font-weight: 400;
+            color: #6b6b6b;
         }
         
         .badge-container {
@@ -429,49 +445,45 @@
         }
         
         .level-tag {
-            background: #667eea;
-            color: white;
+            background: #efede9;
+            color: #8b8b8b;
             font-size: 10px;
             padding: 3px 8px;
-            border-radius: 20px;
         }
         
         .type-tag {
-            background: #8b5cf6;
-            color: white;
+            background: #e8e6e3;
+            color: #8b8b8b;
             font-size: 10px;
             padding: 3px 8px;
-            border-radius: 20px;
         }
         
         .verb-type-tag {
-            background: #f59e0b;
-            color: white;
+            background: #e0ddd8;
+            color: #6b6b6b;
             font-size: 9px;
             padding: 2px 6px;
-            border-radius: 12px;
         }
         
         .speak-btn {
             position: absolute;
             top: 12px;
             right: 12px;
-            background: rgba(102, 126, 234, 0.2);
+            background: transparent;
             border: none;
             font-size: 20px;
             cursor: pointer;
             padding: 6px 10px;
-            border-radius: 40px;
+            color: #b8b0a0;
         }
         
         /* 串字測驗區域 */
         .spelling-area {
             margin-top: 16px;
-            padding: 20px;
-            background: linear-gradient(135deg, #fef9e6, #fff4e0);
-            border-radius: 28px;
+            padding: 24px;
+            background: #faf8f5;
             width: 100%;
-            border: 2px solid #f59e0b;
+            border: 1px solid #efede9;
         }
         
         .spelling-question {
@@ -481,29 +493,27 @@
         
         .spelling-question-label {
             font-size: 12px;
-            color: #f59e0b;
-            font-weight: 600;
-            letter-spacing: 2px;
-            margin-bottom: 8px;
+            color: #b8b0a0;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
         }
         
         .spelling-question-text {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #1e293b;
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: #3a3a3a;
             background: white;
             display: inline-block;
             padding: 12px 24px;
-            border-radius: 60px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 1px solid #efede9;
         }
         
         .spelling-input {
             width: 100%;
-            padding: 16px;
-            font-size: 1.2rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 60px;
+            padding: 14px;
+            font-size: 1.1rem;
+            border: 1px solid #e0ddd8;
             text-align: center;
             outline: none;
             font-family: monospace;
@@ -511,8 +521,7 @@
         }
         
         .spelling-input:focus {
-            border-color: #8b5cf6;
-            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+            border-color: #cbc6bd;
         }
         
         .spelling-buttons {
@@ -522,113 +531,113 @@
         }
         
         .btn-check {
-            background: #10b981;
-            color: white;
+            background: transparent;
+            color: #6b6b6b;
             flex: 1;
-            padding: 14px;
-            font-size: 15px;
+            padding: 12px;
+            font-size: 14px;
+            border: 1px solid #e0ddd8;
+            cursor: pointer;
         }
         
         .btn-skip {
-            background: #f59e0b;
-            color: white;
+            background: transparent;
+            color: #8b8b8b;
             flex: 1;
-            padding: 14px;
-            font-size: 15px;
+            padding: 12px;
+            font-size: 14px;
+            border: 1px solid #e0ddd8;
+            cursor: pointer;
         }
         
         .spelling-feedback {
             margin-top: 16px;
             padding: 12px;
-            border-radius: 60px;
-            font-size: 14px;
+            font-size: 13px;
             text-align: center;
-            font-weight: 500;
         }
         
         .spelling-feedback.correct {
-            background: #d1fae5;
-            color: #065f46;
+            background: #f0f2ed;
+            color: #8ba58b;
         }
         
         .spelling-feedback.wrong {
-            background: #fee2e2;
-            color: #991b1b;
+            background: #faf0ef;
+            color: #b57c6e;
         }
         
         .spelling-stats {
-            font-size: 13px;
-            color: #64748b;
+            font-size: 12px;
+            color: #9e9e9e;
             margin-top: 16px;
             text-align: center;
             padding: 8px;
             background: white;
-            border-radius: 40px;
         }
         
         /* 動詞變化 */
         .conjugation-section {
             margin-top: 16px;
             padding-top: 16px;
-            border-top: 1px dashed #cbd5e1;
+            border-top: 1px solid #efede9;
             width: 100%;
         }
         
         .tense-selector {
             display: flex;
-            gap: 6px;
+            gap: 8px;
             flex-wrap: wrap;
             justify-content: center;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
         }
         
         .tense-btn {
-            background: #e2e8f0;
-            border: none;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 10px;
-            font-weight: 600;
+            background: transparent;
+            border: 1px solid #e0ddd8;
+            padding: 5px 12px;
+            font-size: 11px;
+            font-weight: 500;
             cursor: pointer;
-            color: #475569;
+            color: #8b8b8b;
         }
         
         .tense-btn.active-tense {
-            background: #8b5cf6;
-            color: white;
+            background: #f0ede8;
+            color: #5a5a5a;
+            border-color: #cbc6bd;
         }
         
         .conjugation-table {
             display: flex;
             flex-direction: column;
-            gap: 6px;
-            background: rgba(255,255,255,0.8);
-            border-radius: 16px;
-            padding: 10px;
-            max-height: 250px;
+            gap: 8px;
+            background: white;
+            padding: 12px;
+            max-height: 260px;
             overflow-y: auto;
+            border: 1px solid #efede9;
         }
         
         .conjugation-row {
             display: flex;
             gap: 12px;
             font-size: 13px;
-            padding: 6px 8px;
-            border-radius: 8px;
+            padding: 8px 12px;
             background: white;
-            border-left: 3px solid #8b5cf6;
+            border-left: 2px solid #e0ddd8;
         }
         
         .conjugation-pronoun {
             width: 70px;
-            font-weight: 700;
-            color: #8b5cf6;
+            font-weight: 500;
+            color: #b8b0a0;
         }
         
         .conjugation-verb {
             flex: 1;
-            font-weight: 500;
-            color: #1e293b;
+            font-weight: 400;
+            color: #5a5a5a;
         }
         
         .conjugation-speak {
@@ -637,27 +646,26 @@
             font-size: 14px;
             cursor: pointer;
             padding: 0 6px;
-            color: #667eea;
+            color: #b8b0a0;
         }
         
         .show-conjugation-btn {
-            background: #8b5cf6;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 30px;
+            background: transparent;
+            color: #8b8b8b;
+            border: 1px solid #e0ddd8;
+            padding: 10px 12px;
             font-size: 12px;
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
-            margin-top: 8px;
+            margin-top: 12px;
             width: 100%;
         }
         
         /* 例句區域 */
         .example-section {
-            margin-top: 12px;
+            margin-top: 16px;
             padding-top: 12px;
-            border-top: 1px dashed #cbd5e1;
+            border-top: 1px solid #efede9;
             width: 100%;
             text-align: left;
         }
@@ -666,13 +674,13 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
         
         .example-title {
             font-size: 11px;
-            font-weight: 600;
-            color: #8b5cf6;
+            font-weight: 500;
+            color: #b8b0a0;
         }
         
         .example-speak-btn {
@@ -680,24 +688,24 @@
             border: none;
             font-size: 14px;
             cursor: pointer;
-            color: #667eea;
+            color: #b8b0a0;
         }
         
         .example-text {
             font-size: 12px;
-            color: #475569;
+            color: #6b6b6b;
         }
         
         .example-trans {
             font-size: 11px;
-            color: #94a3b8;
+            color: #9e9e9e;
             margin-top: 4px;
         }
         
         .flip-hint {
             font-size: 10px;
-            color: #94a3b8;
-            margin-top: 12px;
+            color: #cbc6bd;
+            margin-top: 16px;
         }
         
         /* 按鈕 */
@@ -709,117 +717,123 @@
         
         button {
             flex: 1;
-            padding: 10px;
+            padding: 12px;
             font-size: 13px;
-            font-weight: 600;
-            border: none;
-            border-radius: 60px;
+            font-weight: 500;
+            border: 1px solid #e0ddd8;
             cursor: pointer;
             transition: all 0.2s;
+            background: transparent;
+            color: #6b6b6b;
         }
         
         button:active {
-            transform: scale(0.96);
+            transform: scale(0.98);
         }
         
         .btn-know {
-            background: #10b981;
-            color: white;
+            background: #f0f2ed;
+            border-color: #d4dacb;
+            color: #8ba58b;
         }
         
         .btn-review {
-            background: #ef4444;
-            color: white;
+            background: #faf0ef;
+            border-color: #e6dbd9;
+            color: #b57c6e;
         }
         
         .btn-reset {
-            background: #f59e0b;
-            color: white;
+            background: transparent;
+            color: #8b8b8b;
             width: 100%;
             margin-bottom: 12px;
         }
         
         .review-badge {
-            background: #ef4444;
-            color: white;
-            padding: 6px 12px;
-            border-radius: 40px;
+            background: #faf8f5;
+            color: #8b8b8b;
+            padding: 8px 12px;
             text-align: center;
             margin-bottom: 12px;
             font-size: 12px;
+            border: 1px solid #efede9;
         }
         
         /* 新增區塊 */
         .add-section {
-            background: #f8fafc;
-            border-radius: 20px;
-            padding: 14px;
-            margin-top: 16px;
+            background: #faf8f5;
+            padding: 20px;
+            margin-top: 24px;
+            border: 1px solid #efede9;
         }
         
         .add-title {
-            font-size: 13px;
-            font-weight: 600;
-            color: #334155;
-            margin-bottom: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #6b6b6b;
+            margin-bottom: 14px;
         }
         
         .type-selector {
             display: flex;
             gap: 8px;
-            margin-bottom: 10px;
+            margin-bottom: 14px;
         }
         
         .type-btn {
             flex: 1;
-            background: #e2e8f0;
-            color: #475569;
-            padding: 6px;
+            background: transparent;
+            color: #8b8b8b;
+            padding: 8px;
             font-size: 12px;
-            border-radius: 30px;
             cursor: pointer;
+            border: 1px solid #e0ddd8;
         }
         
         .type-btn.active-type {
-            background: #667eea;
-            color: white;
+            background: #f0ede8;
+            color: #5a5a5a;
+            border-color: #cbc6bd;
         }
         
         .level-selector {
             display: flex;
-            gap: 6px;
-            margin-bottom: 10px;
+            gap: 8px;
+            margin-bottom: 14px;
             flex-wrap: wrap;
         }
         
         .level-option {
-            background: #e2e8f0;
-            padding: 5px 10px;
-            border-radius: 30px;
+            background: transparent;
+            padding: 6px 12px;
             font-size: 11px;
             cursor: pointer;
+            border: 1px solid #e0ddd8;
+            color: #8b8b8b;
         }
         
         .level-option.active-level-option {
-            background: #667eea;
-            color: white;
+            background: #f0ede8;
+            color: #5a5a5a;
+            border-color: #cbc6bd;
         }
         
         .input-group {
             display: flex;
-            gap: 8px;
-            margin-bottom: 10px;
+            gap: 10px;
+            margin-bottom: 12px;
             flex-wrap: wrap;
         }
         
         .input-group input, .input-group textarea {
             flex: 1;
-            padding: 10px;
-            border: 1px solid #e2e8f0;
-            border-radius: 20px;
+            padding: 10px 12px;
+            border: 1px solid #e0ddd8;
             font-size: 13px;
             outline: none;
             font-family: inherit;
+            background: white;
         }
         
         .input-group textarea {
@@ -828,15 +842,17 @@
         }
         
         .btn-add {
-            background: #8b5cf6;
-            color: white;
+            background: transparent;
+            color: #8b8b8b;
             width: 100%;
+            border: 1px solid #e0ddd8;
+            padding: 12px;
         }
         
         /* 完成畫面 */
         .completion {
             text-align: center;
-            padding: 30px 20px;
+            padding: 40px 20px;
         }
         
         .completion-buttons {
@@ -847,34 +863,34 @@
         }
         
         .completion-btn {
-            padding: 14px;
-            border-radius: 40px;
-            font-weight: 600;
+            padding: 12px;
+            font-weight: 500;
             cursor: pointer;
-            border: none;
+            border: 1px solid #e0ddd8;
+            background: transparent;
         }
         
         .completion-btn-primary {
-            background: #f59e0b;
-            color: white;
+            background: #f0ede8;
+            color: #5a5a5a;
         }
         
         .completion-btn-secondary {
-            background: #e2e8f0;
-            color: #475569;
+            background: transparent;
+            color: #8b8b8b;
         }
         
         /* 頁尾 */
         .footer-links {
             text-align: center;
-            margin-top: 20px;
-            padding-top: 16px;
-            border-top: 1px solid #e2e8f0;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid #efede9;
             font-size: 11px;
         }
         
         .footer-links a {
-            color: #8b5cf6;
+            color: #b8b0a0;
             text-decoration: none;
             margin: 0 8px;
             cursor: pointer;
@@ -885,14 +901,13 @@
         }
         
         .ad-banner {
-            background: #f8fafc;
-            border-radius: 16px;
+            background: #faf8f5;
             padding: 12px;
             margin: 16px 0;
             text-align: center;
-            border: 1px dashed #cbd5e1;
+            border: 1px solid #efede9;
             font-size: 12px;
-            color: #94a3b8;
+            color: #b8b0a0;
         }
         
         .hidden {
@@ -900,10 +915,10 @@
         }
         
         @media (max-width: 550px) {
-            .app { padding: 14px; }
-            .french { font-size: 1.4rem; }
-            .english { font-size: 1.2rem; }
-            .spelling-question-text { font-size: 1.4rem; padding: 8px 16px; }
+            .app { padding: 18px; }
+            .french { font-size: 1.3rem; }
+            .english { font-size: 1.1rem; }
+            .spelling-question-text { font-size: 1.3rem; padding: 8px 16px; }
         }
     </style>
 </head>
@@ -1018,7 +1033,7 @@
                     <input type="text" id="exampleTransInput" placeholder="例句翻譯 (選填)" autocomplete="off">
                 </div>
                 <button class="btn-add" id="addBtn" onclick="addItem()">➕ 加入學習庫</button>
-                <div style="font-size: 10px; color: #94a3b8; margin-top: 8px; text-align: center;">
+                <div style="font-size: 10px; color: #cbc6bd; margin-top: 8px; text-align: center;">
                     💡 開啟「串字測驗模式」後，會顯示中文，讓您輸入法文拼寫！
                 </div>
             </div>
@@ -1045,7 +1060,7 @@
                 <p>本網站使用瀏覽器的 localStorage 功能儲存您的學習進度。這些資料只存在於您的裝置中，我們無法訪問或獲取這些資料。如果您清除瀏覽器資料，您的學習進度將會被清除。</p>
                 
                 <h2>3. Cookie 使用</h2>
-                <p>本網站可能使用 Cookie 來改善您的使用體驗。Google AdSense（如有啟用）可能會使用 Cookie 來提供個人化廣告。您可以透過瀏覽器設定來管理或禁用 Cookie。</p>
+                <p>本網站可能使用 Cookie 來改善您的使用體驗。您可以透過瀏覽器設定來管理或禁用 Cookie。</p>
                 
                 <h2>4. 第三方服務</h2>
                 <p>本網站使用以下第三方服務：</p>
@@ -1115,11 +1130,25 @@
             </div>
         </div>
         
-        <!-- 聯絡我們頁面 -->
+        <!-- 聯絡我們頁面 - 新增 Email + 問題表單 -->
         <div id="contactPage" class="page">
             <div class="page-content">
                 <h1>📧 聯絡我們</h1>
                 <p>我們很樂意聽到您的聲音！無論是問題、建議還是回饋，都歡迎與我們聯絡。</p>
+                
+                <!-- 聯絡表單 -->
+                <div style="background: #faf8f5; padding: 24px; margin: 20px 0; border: 1px solid #efede9;">
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; font-size: 13px; color: #6b6b6b; margin-bottom: 8px;">電子郵件 *</label>
+                        <input type="email" id="contactEmail" placeholder="您的電子郵件" style="width: 100%; padding: 12px; border: 1px solid #e0ddd8; background: white;">
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; font-size: 13px; color: #6b6b6b; margin-bottom: 8px;">您的問題 / 建議 *</label>
+                        <textarea id="contactMessage" rows="5" placeholder="請告訴我們您的想法..." style="width: 100%; padding: 12px; border: 1px solid #e0ddd8; background: white; font-family: inherit;"></textarea>
+                    </div>
+                    <button id="contactSubmitBtn" style="background: transparent; border: 1px solid #e0ddd8; padding: 12px 28px; cursor: pointer; color: #6b6b6b; width: 100%;">送出訊息</button>
+                    <div id="contactFormStatus" style="margin-top: 16px; font-size: 12px; text-align: center; color: #8ba58b;"></div>
+                </div>
                 
                 <div class="contact-info">
                     <div class="contact-item">
@@ -1149,14 +1178,48 @@
     <script>
         // ========== 頁面切換函數 ==========
         function showPage(pageName) {
-            // 隱藏所有頁面
             document.getElementById('mainPage').classList.remove('active-page');
             document.getElementById('privacyPage').classList.remove('active-page');
             document.getElementById('aboutPage').classList.remove('active-page');
             document.getElementById('contactPage').classList.remove('active-page');
-            
-            // 顯示選中的頁面
             document.getElementById(pageName + 'Page').classList.add('active-page');
+        }
+        
+        // ========== 聯絡表單功能 ==========
+        function setupContactForm() {
+            const submitBtn = document.getElementById('contactSubmitBtn');
+            if (!submitBtn) return;
+            
+            submitBtn.addEventListener('click', function() {
+                const email = document.getElementById('contactEmail').value.trim();
+                const message = document.getElementById('contactMessage').value.trim();
+                const statusDiv = document.getElementById('contactFormStatus');
+                
+                if (!email) {
+                    statusDiv.innerHTML = '✧ 請填寫電子郵件 ✧';
+                    statusDiv.style.color = '#b57c6e';
+                    return;
+                }
+                if (!message) {
+                    statusDiv.innerHTML = '✧ 請填寫您的問題 ✧';
+                    statusDiv.style.color = '#b57c6e';
+                    return;
+                }
+                if (!email.includes('@') || !email.includes('.')) {
+                    statusDiv.innerHTML = '✧ 請輸入有效的電子郵件地址 ✧';
+                    statusDiv.style.color = '#b57c6e';
+                    return;
+                }
+                
+                statusDiv.innerHTML = `✓ 已收到您的訊息，我們會盡快回覆。<br>📧 ${email}<br>📝 ${message.substring(0, 80)}${message.length > 80 ? '…' : ''}`;
+                statusDiv.style.color = '#8ba58b';
+                
+                // 可選：清空表單
+                // document.getElementById('contactEmail').value = '';
+                // document.getElementById('contactMessage').value = '';
+                
+                console.log('聯絡表單:', { email, message });
+            });
         }
         
         // ========== 語言文字庫 ==========
@@ -1670,11 +1733,9 @@
         }
         
         function flipCard() {
-            // 如果正在顯示動詞變化，先關閉
             if (showingConjugation) {
                 showingConjugation = false;
             } else {
-                // 只翻轉法文/中文顯示，不改變 currentIndex
                 showingFrench = !showingFrench;
             }
             updateDisplay();
@@ -1700,14 +1761,12 @@
                 todayNewCount++;
                 saveData();
             }
-            // 移到下一個未學會的單字
             const nextIndex = filtered.findIndex((i, idx) => !i.known && idx > currentIndex);
             if (nextIndex !== -1) {
                 currentIndex = nextIndex;
             } else {
                 currentIndex = filtered.findIndex(i => !i.known);
             }
-            // 重置顯示狀態
             showingFrench = true;
             showingConjugation = false;
             updateErrorList();
@@ -1725,14 +1784,12 @@
                 todayReviewCount++;
                 saveData();
             }
-            // 移到下一個未學會的單字
             const nextIndex = filtered.findIndex((i, idx) => !i.known && idx > currentIndex);
             if (nextIndex !== -1) {
                 currentIndex = nextIndex;
             } else {
                 currentIndex = filtered.findIndex(i => !i.known);
             }
-            // 重置顯示狀態
             showingFrench = true;
             showingConjugation = false;
             updateErrorList();
@@ -1883,7 +1940,7 @@
                     const percent = Math.round(levelMastered / levelTotal * 100);
                     levelHtml += `
                         <div class="stats-row"><span>📘 ${lvl} (${levelMastered}/${levelTotal})</span><span>${percent}%</span></div>
-                        <div class="progress-bar"><div class="progress-fill" style="width: ${percent}%; background: #8b5cf6;"></div></div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: ${percent}%; background: #cbc6bd;"></div></div>
                     `;
                 }
             }
@@ -1918,7 +1975,8 @@
             if (type === 'word') document.querySelectorAll('.type-btn')[0].classList.add('active-type');
             else if (type === 'verb') document.querySelectorAll('.type-btn')[1].classList.add('active-type');
             else document.querySelectorAll('.type-btn')[2].classList.add('active-type');
-            document.getElementById('levelSelectorContainer').style.display = type !== 'phrase' ? 'flex' : 'none';
+            const levelContainer = document.getElementById('levelSelectorContainer');
+            if (levelContainer) levelContainer.style.display = type !== 'phrase' ? 'flex' : 'none';
         }
         
         function selectAddLevel(level) {
@@ -1969,35 +2027,39 @@
             const t = texts[currentLang];
             document.getElementById('mainTitle').innerText = t.mainTitle;
             document.getElementById('mainSub').innerText = t.mainSub;
-            document.getElementById('spellingToggleLabel').innerHTML = `${t.spellingToggle} <span style="font-size: 11px;">(看中文 • 打法文)</span>`;
+            const toggleLabel = document.getElementById('spellingToggleLabel');
+            if (toggleLabel) toggleLabel.innerHTML = `${t.spellingToggle} <span style="font-size: 11px;">(看中文 • 打法文)</span>`;
             
             const levelBadges = document.querySelectorAll('.level-badge');
             if (levelBadges.length >= 6) {
                 levelBadges[0].innerHTML = currentLang === 'zh' ? '📚 全部' : '📚 All';
-                levelBadges[1].innerHTML = t.levelA1 || (currentLang === 'zh' ? '🇫🇷 A1 初級' : '🇫🇷 A1 Beginner');
-                levelBadges[2].innerHTML = t.levelA2 || (currentLang === 'zh' ? '🇫🇷 A2 基礎' : '🇫🇷 A2 Elementary');
-                levelBadges[3].innerHTML = t.levelB1 || (currentLang === 'zh' ? '🇫🇷 B1 中級' : '🇫🇷 B1 Intermediate');
-                levelBadges[4].innerHTML = t.levelB2 || (currentLang === 'zh' ? '🇫🇷 B2 中高級' : '🇫🇷 B2 Upper');
-                levelBadges[5].innerHTML = t.levelC1 || (currentLang === 'zh' ? '🇫🇷 C1 高級' : '🇫🇷 C1 Advanced');
+                levelBadges[1].innerHTML = currentLang === 'zh' ? '🇫🇷 A1 初級' : '🇫🇷 A1 Beginner';
+                levelBadges[2].innerHTML = currentLang === 'zh' ? '🇫🇷 A2 基礎' : '🇫🇷 A2 Elementary';
+                levelBadges[3].innerHTML = currentLang === 'zh' ? '🇫🇷 B1 中級' : '🇫🇷 B1 Intermediate';
+                levelBadges[4].innerHTML = currentLang === 'zh' ? '🇫🇷 B2 中高級' : '🇫🇷 B2 Upper';
+                levelBadges[5].innerHTML = currentLang === 'zh' ? '🇫🇷 C1 高級' : '🇫🇷 C1 Advanced';
             }
             
             document.getElementById('tabLearnText').innerText = t.tabLearn;
             document.getElementById('tabReviewText').innerText = t.tabReview;
             document.getElementById('tabStatsText').innerText = t.tabStats;
             document.getElementById('goalTitle').innerText = t.goalTitle;
-            document.getElementById('setGoalBtn').innerText = t.setGoal;
+            const setGoalBtn = document.getElementById('setGoalBtn');
+            if (setGoalBtn) setGoalBtn.innerText = t.setGoal;
             document.getElementById('todayNewLabel').innerHTML = t.todayNew;
             document.getElementById('todayReviewLabel').innerHTML = t.todayReview;
             document.getElementById('statTotalLabel').innerText = t.statTotal;
             document.getElementById('statMasteredLabel').innerText = t.statMastered;
             document.getElementById('statErrorLabel').innerText = t.statError;
             document.getElementById('statAccuracyLabel').innerText = t.statAccuracy;
-            document.getElementById('resetAllBtn').innerHTML = t.resetAll;
+            const resetBtn = document.getElementById('resetAllBtn');
+            if (resetBtn) resetBtn.innerHTML = t.resetAll;
             document.getElementById('addTitle').innerText = t.addTitle;
             document.getElementById('typeWordText').innerText = t.typeWord;
             document.getElementById('typeVerbText').innerText = t.typeVerb;
             document.getElementById('typePhraseText').innerText = t.typePhrase;
-            document.getElementById('addBtn').innerHTML = t.addBtn;
+            const addBtn = document.getElementById('addBtn');
+            if (addBtn) addBtn.innerHTML = t.addBtn;
             
             updateDisplay();
             if (currentMode === 'review') updateReviewDisplay();
@@ -2061,6 +2123,7 @@
         updateDisplay();
         setAddType('word');
         selectAddLevel('A1');
+        setupContactForm();
     </script>
 </body>
 </html>
