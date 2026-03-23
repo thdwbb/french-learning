@@ -1,0 +1,2066 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="輕鬆學法文 - 免費法文學習平台，包含串字測驗、動詞變化、例句發音">
+    <title>輕鬆學法文 - 免費法文學習平台</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 16px;
+        }
+        
+        .app {
+            max-width: 650px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 32px;
+            padding: 20px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+        }
+        
+        /* 頁面切換 */
+        .page {
+            display: none;
+        }
+        
+        .page.active-page {
+            display: block;
+        }
+        
+        .back-to-home {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 24px;
+            background: #8b5cf6;
+            color: white;
+            border-radius: 40px;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            font-weight: 600;
+        }
+        
+        .back-to-home:hover {
+            background: #6d28d9;
+        }
+        
+        /* 頁面內容樣式 */
+        .page-content {
+            max-width: 100%;
+        }
+        
+        .page-content h1 {
+            font-size: 28px;
+            margin-bottom: 16px;
+            color: #1a1a2e;
+        }
+        
+        .page-content h2 {
+            color: #667eea;
+            margin: 24px 0 12px 0;
+            font-size: 1.3rem;
+        }
+        
+        .page-content p {
+            color: #475569;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+        
+        .page-content ul {
+            margin-left: 20px;
+            color: #475569;
+            line-height: 1.6;
+        }
+        
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+        
+        .feature-card {
+            background: #f8fafc;
+            padding: 16px;
+            border-radius: 16px;
+            text-align: center;
+        }
+        
+        .feature-card div:first-child {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+        
+        .contact-info {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 20px;
+            margin: 20px 0;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .contact-item:last-child {
+            border-bottom: none;
+        }
+        
+        .contact-icon {
+            font-size: 24px;
+            width: 40px;
+        }
+        
+        /* 語言切換 */
+        .lang-switch {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        
+        .lang-btn {
+            background: #f1f5f9;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            color: #64748b;
+            transition: all 0.2s;
+        }
+        
+        .lang-btn.active-lang {
+            background: #667eea;
+            color: white;
+        }
+        
+        /* 串字模式開關 */
+        .spelling-toggle {
+            background: linear-gradient(135deg, #8b5cf6, #667eea);
+            border-radius: 60px;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+        }
+        
+        .toggle-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 54px;
+            height: 28px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #cbd5e1;
+            transition: 0.3s;
+            border-radius: 34px;
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: 0.3s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .toggle-slider {
+            background-color: #f59e0b;
+        }
+        
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+        
+        /* 頁籤 */
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            background: #f1f5f9;
+            padding: 6px;
+            border-radius: 60px;
+        }
+        
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 10px 8px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            color: #64748b;
+            transition: all 0.2s;
+        }
+        
+        .tab.active {
+            background: white;
+            color: #667eea;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 26px;
+            color: #1a1a2e;
+        }
+        
+        .sub {
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+            margin-bottom: 16px;
+        }
+        
+        /* 等級篩選器 */
+        .level-filter {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+        
+        .level-badge {
+            background: #e2e8f0;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            color: #475569;
+            transition: all 0.2s;
+        }
+        
+        .level-badge.active-level {
+            background: #667eea;
+            color: white;
+        }
+        
+        /* 每日目標卡片 */
+        .daily-goal-card {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-radius: 20px;
+            padding: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .goal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .goal-title {
+            font-weight: 700;
+            color: #92400e;
+            font-size: 14px;
+        }
+        
+        .goal-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #b45309;
+        }
+        
+        .goal-control {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        
+        .goal-control input {
+            flex: 1;
+            padding: 6px 10px;
+            border: 1px solid #f59e0b;
+            border-radius: 40px;
+            text-align: center;
+            font-size: 12px;
+        }
+        
+        .goal-control button {
+            background: #f59e0b;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 40px;
+            font-size: 11px;
+            border: none;
+            cursor: pointer;
+        }
+        
+        /* 統計卡片 */
+        .stats-dashboard {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-card {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 24px;
+            font-weight: 700;
+            color: #667eea;
+        }
+        
+        .stat-label {
+            font-size: 11px;
+            color: #64748b;
+        }
+        
+        /* 進度條 */
+        .progress-section {
+            margin-bottom: 16px;
+        }
+        
+        .stats-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: #666;
+            margin-bottom: 6px;
+        }
+        
+        .progress-bar {
+            background: #e5e7eb;
+            border-radius: 20px;
+            height: 6px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(90deg, #10b981, #34d399);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        /* 閃卡 */
+        .flashcard {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            border-radius: 28px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            margin: 16px 0;
+            min-height: 350px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            transition: transform 0.1s;
+        }
+        
+        .flashcard:active {
+            transform: scale(0.98);
+        }
+        
+        .french {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+        
+        .english {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #475569;
+        }
+        
+        .badge-container {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        
+        .level-tag {
+            background: #667eea;
+            color: white;
+            font-size: 10px;
+            padding: 3px 8px;
+            border-radius: 20px;
+        }
+        
+        .type-tag {
+            background: #8b5cf6;
+            color: white;
+            font-size: 10px;
+            padding: 3px 8px;
+            border-radius: 20px;
+        }
+        
+        .verb-type-tag {
+            background: #f59e0b;
+            color: white;
+            font-size: 9px;
+            padding: 2px 6px;
+            border-radius: 12px;
+        }
+        
+        .speak-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(102, 126, 234, 0.2);
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 6px 10px;
+            border-radius: 40px;
+        }
+        
+        /* 串字測驗區域 */
+        .spelling-area {
+            margin-top: 16px;
+            padding: 20px;
+            background: linear-gradient(135deg, #fef9e6, #fff4e0);
+            border-radius: 28px;
+            width: 100%;
+            border: 2px solid #f59e0b;
+        }
+        
+        .spelling-question {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .spelling-question-label {
+            font-size: 12px;
+            color: #f59e0b;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+        
+        .spelling-question-text {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e293b;
+            background: white;
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 60px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .spelling-input {
+            width: 100%;
+            padding: 16px;
+            font-size: 1.2rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 60px;
+            text-align: center;
+            outline: none;
+            font-family: monospace;
+            background: white;
+        }
+        
+        .spelling-input:focus {
+            border-color: #8b5cf6;
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+        }
+        
+        .spelling-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+        
+        .btn-check {
+            background: #10b981;
+            color: white;
+            flex: 1;
+            padding: 14px;
+            font-size: 15px;
+        }
+        
+        .btn-skip {
+            background: #f59e0b;
+            color: white;
+            flex: 1;
+            padding: 14px;
+            font-size: 15px;
+        }
+        
+        .spelling-feedback {
+            margin-top: 16px;
+            padding: 12px;
+            border-radius: 60px;
+            font-size: 14px;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .spelling-feedback.correct {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        
+        .spelling-feedback.wrong {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        
+        .spelling-stats {
+            font-size: 13px;
+            color: #64748b;
+            margin-top: 16px;
+            text-align: center;
+            padding: 8px;
+            background: white;
+            border-radius: 40px;
+        }
+        
+        /* 動詞變化 */
+        .conjugation-section {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px dashed #cbd5e1;
+            width: 100%;
+        }
+        
+        .tense-selector {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+        
+        .tense-btn {
+            background: #e2e8f0;
+            border: none;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            color: #475569;
+        }
+        
+        .tense-btn.active-tense {
+            background: #8b5cf6;
+            color: white;
+        }
+        
+        .conjugation-table {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 16px;
+            padding: 10px;
+            max-height: 250px;
+            overflow-y: auto;
+        }
+        
+        .conjugation-row {
+            display: flex;
+            gap: 12px;
+            font-size: 13px;
+            padding: 6px 8px;
+            border-radius: 8px;
+            background: white;
+            border-left: 3px solid #8b5cf6;
+        }
+        
+        .conjugation-pronoun {
+            width: 70px;
+            font-weight: 700;
+            color: #8b5cf6;
+        }
+        
+        .conjugation-verb {
+            flex: 1;
+            font-weight: 500;
+            color: #1e293b;
+        }
+        
+        .conjugation-speak {
+            background: none;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 0 6px;
+            color: #667eea;
+        }
+        
+        .show-conjugation-btn {
+            background: #8b5cf6;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 8px;
+            width: 100%;
+        }
+        
+        /* 例句區域 */
+        .example-section {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px dashed #cbd5e1;
+            width: 100%;
+            text-align: left;
+        }
+        
+        .example-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+        
+        .example-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: #8b5cf6;
+        }
+        
+        .example-speak-btn {
+            background: none;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+            color: #667eea;
+        }
+        
+        .example-text {
+            font-size: 12px;
+            color: #475569;
+        }
+        
+        .example-trans {
+            font-size: 11px;
+            color: #94a3b8;
+            margin-top: 4px;
+        }
+        
+        .flip-hint {
+            font-size: 10px;
+            color: #94a3b8;
+            margin-top: 12px;
+        }
+        
+        /* 按鈕 */
+        .buttons {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        
+        button {
+            flex: 1;
+            padding: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        button:active {
+            transform: scale(0.96);
+        }
+        
+        .btn-know {
+            background: #10b981;
+            color: white;
+        }
+        
+        .btn-review {
+            background: #ef4444;
+            color: white;
+        }
+        
+        .btn-reset {
+            background: #f59e0b;
+            color: white;
+            width: 100%;
+            margin-bottom: 12px;
+        }
+        
+        .review-badge {
+            background: #ef4444;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 40px;
+            text-align: center;
+            margin-bottom: 12px;
+            font-size: 12px;
+        }
+        
+        /* 新增區塊 */
+        .add-section {
+            background: #f8fafc;
+            border-radius: 20px;
+            padding: 14px;
+            margin-top: 16px;
+        }
+        
+        .add-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 10px;
+        }
+        
+        .type-selector {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .type-btn {
+            flex: 1;
+            background: #e2e8f0;
+            color: #475569;
+            padding: 6px;
+            font-size: 12px;
+            border-radius: 30px;
+            cursor: pointer;
+        }
+        
+        .type-btn.active-type {
+            background: #667eea;
+            color: white;
+        }
+        
+        .level-selector {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .level-option {
+            background: #e2e8f0;
+            padding: 5px 10px;
+            border-radius: 30px;
+            font-size: 11px;
+            cursor: pointer;
+        }
+        
+        .level-option.active-level-option {
+            background: #667eea;
+            color: white;
+        }
+        
+        .input-group {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .input-group input, .input-group textarea {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            font-size: 13px;
+            outline: none;
+            font-family: inherit;
+        }
+        
+        .input-group textarea {
+            min-width: 100%;
+            resize: vertical;
+        }
+        
+        .btn-add {
+            background: #8b5cf6;
+            color: white;
+            width: 100%;
+        }
+        
+        /* 完成畫面 */
+        .completion {
+            text-align: center;
+            padding: 30px 20px;
+        }
+        
+        .completion-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 24px;
+        }
+        
+        .completion-btn {
+            padding: 14px;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .completion-btn-primary {
+            background: #f59e0b;
+            color: white;
+        }
+        
+        .completion-btn-secondary {
+            background: #e2e8f0;
+            color: #475569;
+        }
+        
+        /* 頁尾 */
+        .footer-links {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid #e2e8f0;
+            font-size: 11px;
+        }
+        
+        .footer-links a {
+            color: #8b5cf6;
+            text-decoration: none;
+            margin: 0 8px;
+            cursor: pointer;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .ad-banner {
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 12px;
+            margin: 16px 0;
+            text-align: center;
+            border: 1px dashed #cbd5e1;
+            font-size: 12px;
+            color: #94a3b8;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        @media (max-width: 550px) {
+            .app { padding: 14px; }
+            .french { font-size: 1.4rem; }
+            .english { font-size: 1.2rem; }
+            .spelling-question-text { font-size: 1.4rem; padding: 8px 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <!-- 主頁面 - 法文學習工具 -->
+        <div id="mainPage" class="page active-page">
+            <div class="lang-switch">
+                <button class="lang-btn active-lang" onclick="setLanguage('zh')">中文</button>
+                <button class="lang-btn" onclick="setLanguage('en')">English</button>
+            </div>
+            
+            <h1 id="mainTitle">🇫🇷 輕鬆學法文</h1>
+            <div id="mainSub" class="sub">✍️ 串字測驗 • 看中文，打法文！</div>
+            
+            <div class="ad-banner">📢 支持我們繼續提供免費學習資源</div>
+            
+            <div class="spelling-toggle">
+                <div class="toggle-label">
+                    <span>✍️</span>
+                    <span id="spellingToggleLabel">串字測驗模式</span>
+                    <span style="font-size: 11px;">(看中文 • 打法文)</span>
+                </div>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="spellingModeToggle" onchange="toggleSpellingMode()">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+            
+            <div class="level-filter">
+                <div class="level-badge active-level" data-level="all" onclick="filterByLevel('all')">📚 全部</div>
+                <div class="level-badge" data-level="A1" onclick="filterByLevel('A1')">🇫🇷 A1 初級</div>
+                <div class="level-badge" data-level="A2" onclick="filterByLevel('A2')">🇫🇷 A2 基礎</div>
+                <div class="level-badge" data-level="B1" onclick="filterByLevel('B1')">🇫🇷 B1 中級</div>
+                <div class="level-badge" data-level="B2" onclick="filterByLevel('B2')">🇫🇷 B2 中高級</div>
+                <div class="level-badge" data-level="C1" onclick="filterByLevel('C1')">🇫🇷 C1 高級</div>
+            </div>
+            
+            <div class="tabs">
+                <div class="tab active" onclick="switchTab('learn')">📖 <span id="tabLearnText">學習</span></div>
+                <div class="tab" onclick="switchTab('review')">🔄 <span id="tabReviewText">複習錯字</span></div>
+                <div class="tab" onclick="switchTab('stats')">📊 <span id="tabStatsText">統計</span></div>
+            </div>
+            
+            <div class="daily-goal-card">
+                <div class="goal-header">
+                    <span class="goal-title" id="goalTitle">🎯 今日目標</span>
+                    <span class="goal-value" id="dailyGoalDisplay">10</span>
+                </div>
+                <div class="goal-control">
+                    <input type="number" id="dailyGoalInput" min="1" max="50" value="10">
+                    <button id="setGoalBtn" onclick="setDailyGoal()">設定目標</button>
+                </div>
+                <div class="stats-row" style="margin-top: 8px;">
+                    <span id="todayNewLabel">📖 今日新學:</span>
+                    <span id="todayNewCount">0</span>
+                </div>
+                <div class="stats-row">
+                    <span id="todayReviewLabel">🔄 今日複習:</span>
+                    <span id="todayReviewCount">0</span>
+                </div>
+                <div class="progress-bar" style="margin-top: 8px;">
+                    <div class="progress-fill" id="dailyProgressFill"></div>
+                </div>
+            </div>
+            
+            <div id="learnSection">
+                <div id="cardArea"></div>
+                <div id="spellingArea" class="spelling-area hidden"></div>
+                <div id="buttonArea"></div>
+            </div>
+            
+            <div id="reviewSection" class="hidden">
+                <div id="reviewCardArea"></div>
+                <div id="reviewSpellingArea" class="spelling-area hidden"></div>
+                <div id="reviewButtonArea"></div>
+            </div>
+            
+            <div id="statsSection" class="hidden">
+                <div class="stats-dashboard">
+                    <div class="stat-card"><div class="stat-number" id="totalWordsStat">0</div><div class="stat-label" id="statTotalLabel">總項目</div></div>
+                    <div class="stat-card"><div class="stat-number" id="masteredStat">0</div><div class="stat-label" id="statMasteredLabel">已學會</div></div>
+                    <div class="stat-card"><div class="stat-number" id="errorStat">0</div><div class="stat-label" id="statErrorLabel">待複習</div></div>
+                    <div class="stat-card"><div class="stat-number" id="accuracyStat">0%</div><div class="stat-label" id="statAccuracyLabel">正確率</div></div>
+                </div>
+                <div id="levelProgressContainer"></div>
+                <button class="btn-reset" id="resetAllBtn" onclick="resetAllStats()">🔄 重置所有統計</button>
+            </div>
+            
+            <div class="add-section">
+                <div class="add-title" id="addTitle">➕ 新增內容</div>
+                <div class="type-selector">
+                    <button class="type-btn active-type" onclick="setAddType('word')">📝 <span id="typeWordText">單字</span></button>
+                    <button class="type-btn" onclick="setAddType('verb')">🎭 <span id="typeVerbText">動詞</span></button>
+                    <button class="type-btn" onclick="setAddType('phrase')">💬 <span id="typePhraseText">詞組</span></button>
+                </div>
+                <div id="levelSelectorContainer" class="level-selector">
+                    <div class="level-option active-level-option" data-level="A1" onclick="selectAddLevel('A1')">A1</div>
+                    <div class="level-option" data-level="A2" onclick="selectAddLevel('A2')">A2</div>
+                    <div class="level-option" data-level="B1" onclick="selectAddLevel('B1')">B1</div>
+                    <div class="level-option" data-level="B2" onclick="selectAddLevel('B2')">B2</div>
+                    <div class="level-option" data-level="C1" onclick="selectAddLevel('C1')">C1</div>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="nativeInput" placeholder="法文單字/動詞/詞組" autocomplete="off">
+                    <input type="text" id="targetInput" placeholder="中文翻譯" autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <textarea id="exampleInput" rows="2" placeholder="例句 (選填)"></textarea>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="exampleTransInput" placeholder="例句翻譯 (選填)" autocomplete="off">
+                </div>
+                <button class="btn-add" id="addBtn" onclick="addItem()">➕ 加入學習庫</button>
+                <div style="font-size: 10px; color: #94a3b8; margin-top: 8px; text-align: center;">
+                    💡 開啟「串字測驗模式」後，會顯示中文，讓您輸入法文拼寫！
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <a onclick="showPage('privacy')">隱私政策</a> | 
+                <a onclick="showPage('about')">關於我們</a> | 
+                <a onclick="showPage('contact')">聯絡我們</a>
+                <br>
+                <span style="font-size: 10px;">© 2025 輕鬆學法文 - 免費法文學習平台</span>
+            </div>
+        </div>
+        
+        <!-- 隱私政策頁面 -->
+        <div id="privacyPage" class="page">
+            <div class="page-content">
+                <h1>🔒 隱私政策</h1>
+                <p>最後更新日期：2025年3月</p>
+                
+                <h2>1. 我們收集的資訊</h2>
+                <p>輕鬆學法文（以下簡稱「本網站」）不會收集任何個人身份資訊。所有學習進度（包括您學會的單字、錯誤統計、每日目標等）都僅儲存在您裝置的本地儲存空間中，不會上傳到任何伺服器。</p>
+                
+                <h2>2. 本地儲存</h2>
+                <p>本網站使用瀏覽器的 localStorage 功能儲存您的學習進度。這些資料只存在於您的裝置中，我們無法訪問或獲取這些資料。如果您清除瀏覽器資料，您的學習進度將會被清除。</p>
+                
+                <h2>3. Cookie 使用</h2>
+                <p>本網站可能使用 Cookie 來改善您的使用體驗。Google AdSense（如有啟用）可能會使用 Cookie 來提供個人化廣告。您可以透過瀏覽器設定來管理或禁用 Cookie。</p>
+                
+                <h2>4. 第三方服務</h2>
+                <p>本網站使用以下第三方服務：</p>
+                <ul style="margin-left: 20px; margin-bottom: 12px;">
+                    <li><strong>Web Speech API</strong>：用於提供法文發音功能。語音資料僅在您的裝置上處理，不會傳送到伺服器。</li>
+                </ul>
+                
+                <h2>5. 外部連結</h2>
+                <p>本網站可能包含指向其他網站的連結。我們對這些網站的隱私實踐不負任何責任，建議您查閱這些網站的隱私政策。</p>
+                
+                <h2>6. 兒童隱私</h2>
+                <p>本網站適合所有年齡層使用。我們不會有意收集任何年齡用戶的個人資訊。</p>
+                
+                <h2>7. 政策變更</h2>
+                <p>我們可能會不定期更新本隱私政策。任何變更將在此頁面公布，建議您定期查看。</p>
+                
+                <h2>8. 聯絡我們</h2>
+                <p>如果您對本隱私政策有任何疑問，請透過「聯絡我們」頁面與我們聯繫。</p>
+                
+                <button class="back-to-home" onclick="showPage('main')">← 返回首頁</button>
+            </div>
+        </div>
+        
+        <!-- 關於我們頁面 -->
+        <div id="aboutPage" class="page">
+            <div class="page-content">
+                <h1>🇫🇷 關於我們</h1>
+                
+                <h2>我們的使命</h2>
+                <p>讓法文學習變得簡單、有趣、免費！我們相信每個人都應該有機會學習新的語言，而不被昂貴的課程費用阻礙。輕鬆學法文致力於提供高品質、完全免費的法文學習工具，幫助全球使用者掌握法文。</p>
+                
+                <h2>我們的特色</h2>
+                <div class="feature-list">
+                    <div class="feature-card">
+                        <div>✍️</div>
+                        <strong>串字測驗</strong><br>看中文，打法文
+                    </div>
+                    <div class="feature-card">
+                        <div>🎭</div>
+                        <strong>動詞變化</strong><br>8人稱完整變化
+                    </div>
+                    <div class="feature-card">
+                        <div>🔊</div>
+                        <strong>例句發音</strong><br>標準法語發音
+                    </div>
+                    <div class="feature-card">
+                        <div>📊</div>
+                        <strong>學習統計</strong><br>追蹤學習進度
+                    </div>
+                </div>
+                
+                <h2>我們的承諾</h2>
+                <p>✅ 永遠免費 - 所有核心功能完全免費使用<br>
+                ✅ 無需註冊 - 打開即用，不收集個人資訊<br>
+                ✅ 持續更新 - 定期新增單字和功能<br>
+                ✅ 離線可用 - 學習進度儲存在您的裝置中</p>
+                
+                <h2>支援我們</h2>
+                <p>如果您喜歡我們的平台，可以透過以下方式支持我們：</p>
+                <ul>
+                    <li>📢 分享給更多學習法文的朋友</li>
+                    <li>⭐ 在社交媒體上推薦我們</li>
+                    <li>💡 提供建議幫助我們改進</li>
+                </ul>
+                
+                <button class="back-to-home" onclick="showPage('main')">← 返回首頁</button>
+            </div>
+        </div>
+        
+        <!-- 聯絡我們頁面 -->
+        <div id="contactPage" class="page">
+            <div class="page-content">
+                <h1>📧 聯絡我們</h1>
+                <p>我們很樂意聽到您的聲音！無論是問題、建議還是回饋，都歡迎與我們聯絡。</p>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div><strong>電子郵件</strong><br>french.learning@example.com</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">💬</div>
+                        <div><strong>回覆時間</strong><br>我們會在 48 小時內回覆</div>
+                    </div>
+                </div>
+                
+                <h2>常見問題</h2>
+                <p><strong>❓ 學習進度會遺失嗎？</strong><br>您的學習進度儲存在瀏覽器的本地儲存中。如果您清除瀏覽器資料或更換裝置，進度將會遺失。建議定期截圖記錄。</p>
+                
+                <p><strong>❓ 可以離線使用嗎？</strong><br>是的！首次載入後，您可以在沒有網路的環境下使用（發音功能需要網路）。</p>
+                
+                <p><strong>❓ 如何新增自己的單字？</strong><br>在首頁底部的「新增內容」區塊，輸入法文和翻譯，點擊加入即可。</p>
+                
+                <p><strong>❓ 串字模式怎麼用？</strong><br>開啟頂部的「串字測驗模式」開關，系統會顯示中文翻譯，您需要輸入正確的法文拼寫。</p>
+                
+                <button class="back-to-home" onclick="showPage('main')">← 返回首頁</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========== 頁面切換函數 ==========
+        function showPage(pageName) {
+            // 隱藏所有頁面
+            document.getElementById('mainPage').classList.remove('active-page');
+            document.getElementById('privacyPage').classList.remove('active-page');
+            document.getElementById('aboutPage').classList.remove('active-page');
+            document.getElementById('contactPage').classList.remove('active-page');
+            
+            // 顯示選中的頁面
+            document.getElementById(pageName + 'Page').classList.add('active-page');
+        }
+        
+        // ========== 語言文字庫 ==========
+        const texts = {
+            zh: {
+                mainTitle: "🇫🇷 輕鬆學法文",
+                mainSub: "✍️ 串字測驗 • 看中文，打法文！",
+                spellingToggle: "✍️ 串字測驗模式",
+                tabLearn: "學習", tabReview: "複習錯字", tabStats: "統計",
+                goalTitle: "🎯 今日目標", setGoal: "設定目標",
+                todayNew: "📖 今日新學:", todayReview: "🔄 今日複習:",
+                statTotal: "總項目", statMastered: "已學會", statError: "待複習", statAccuracy: "正確率",
+                resetAll: "🔄 重置所有統計", addTitle: "➕ 新增內容",
+                typeWord: "單字", typeVerb: "動詞", typePhrase: "詞組",
+                addBtn: "➕ 加入學習庫", needReview: "❌ 錯了 / 不熟", correct: "✅ 正確 / 學會了",
+                resetSession: "🔄 重置本輪進度", flipHint: "👆 點擊翻轉",
+                showConjugation: "📊 查看動詞變化 (8人稱)", hideConjugation: "返回單字",
+                noReview: "✅ 沒有需要複習的錯誤！繼續加油！",
+                restartSameLevel: "🔄 重新開始此等級", restartAll: "📚 重置所有等級",
+                spellingQuestion: "✍️ 請拼寫出以下單字",
+                spellingHint: "請輸入法文拼寫",
+                checkAnswer: "✓ 檢查答案", skipWord: "⏭ 跳過 / 顯示答案",
+                spellingCorrect: "✅ 正確！繼續加油！",
+                spellingWrong: "❌ 錯誤！正確答案是：",
+                spellingStats: "📊 串字統計: 正確 {correct} / 總共 {total}",
+                exampleTitle: "📖 例句"
+            },
+            en: {
+                mainTitle: "🇫🇷 Learn French Easily",
+                mainSub: "✍️ Spelling Test • See English, Type French!",
+                spellingToggle: "✍️ Spelling Test Mode",
+                tabLearn: "Learn", tabReview: "Review Errors", tabStats: "Stats",
+                goalTitle: "🎯 Daily Goal", setGoal: "Set Goal",
+                todayNew: "📖 New Today:", todayReview: "🔄 Reviewed Today:",
+                statTotal: "Total Items", statMastered: "Mastered", statError: "To Review", statAccuracy: "Accuracy",
+                resetAll: "🔄 Reset All Stats", addTitle: "➕ Add Content",
+                typeWord: "Word", typeVerb: "Verb", typePhrase: "Phrase",
+                addBtn: "➕ Add to Library", needReview: "❌ Wrong", correct: "✅ Correct",
+                resetSession: "🔄 Reset Session", flipHint: "👆 Tap to flip",
+                showConjugation: "📊 View Conjugation", hideConjugation: "Back",
+                noReview: "✅ Nothing to review!",
+                restartSameLevel: "🔄 Restart Level", restartAll: "📚 Reset All",
+                spellingQuestion: "✍️ Spell the word:",
+                spellingHint: "Type the French spelling",
+                checkAnswer: "✓ Check Answer", skipWord: "⏭ Skip / Show Answer",
+                spellingCorrect: "✅ Correct! Well done!",
+                spellingWrong: "❌ Wrong! Correct answer: ",
+                spellingStats: "📊 Spelling Stats: {correct} / {total} correct",
+                exampleTitle: "📖 Example"
+            }
+        };
+        
+        let currentLang = 'zh';
+        let currentLevelFilter = 'all';
+        let addSelectedLevel = 'A1';
+        let currentMode = 'learn';
+        let showingConjugation = false;
+        let currentTense = 'present';
+        let spellingModeEnabled = false;
+        let spellingActive = false;
+        let spellingCorrectCount = 0;
+        let spellingTotalCount = 0;
+        
+        let items = [];
+        let errorItems = [];
+        let currentIndex = 0;
+        let showingFrench = true;
+        let reviewIndex = 0;
+        let reviewShowingFrench = true;
+        let dailyGoal = 10;
+        let todayNewCount = 0;
+        let todayReviewCount = 0;
+        let lastResetDate = new Date().toDateString();
+        let addType = 'word';
+        
+        const pronounList = [
+            { key: "je", label: "Je" }, { key: "tu", label: "Tu" },
+            { key: "il", label: "Il" }, { key: "elle", label: "Elle" },
+            { key: "nous", label: "Nous" }, { key: "vous", label: "Vous" },
+            { key: "ils", label: "Ils" }, { key: "elles", label: "Elles" }
+        ];
+        
+        // ========== 動詞變化引擎 ==========
+        const irregularDB = {
+            'être': {
+                present: { je: 'suis', tu: 'es', il: 'est', elle: 'est', nous: 'sommes', vous: 'êtes', ils: 'sont', elles: 'sont' },
+                imparfait: { je: 'étais', tu: 'étais', il: 'était', elle: 'était', nous: 'étions', vous: 'étiez', ils: 'étaient', elles: 'étaient' },
+                futur: { je: 'serai', tu: 'seras', il: 'sera', elle: 'sera', nous: 'serons', vous: 'serez', ils: 'seront', elles: 'seront' }
+            },
+            'avoir': {
+                present: { je: 'ai', tu: 'as', il: 'a', elle: 'a', nous: 'avons', vous: 'avez', ils: 'ont', elles: 'ont' },
+                imparfait: { je: 'avais', tu: 'avais', il: 'avait', elle: 'avait', nous: 'avions', vous: 'aviez', ils: 'avaient', elles: 'avaient' },
+                futur: { je: 'aurai', tu: 'auras', il: 'aura', elle: 'aura', nous: 'aurons', vous: 'aurez', ils: 'auront', elles: 'auront' }
+            },
+            'aller': {
+                present: { je: 'vais', tu: 'vas', il: 'va', elle: 'va', nous: 'allons', vous: 'allez', ils: 'vont', elles: 'vont' },
+                imparfait: { je: 'allais', tu: 'allais', il: 'allait', elle: 'allait', nous: 'allions', vous: 'alliez', ils: 'allaient', elles: 'allaient' },
+                futur: { je: 'irai', tu: 'iras', il: 'ira', elle: 'ira', nous: 'irons', vous: 'irez', ils: 'iront', elles: 'iront' }
+            },
+            'faire': {
+                present: { je: 'fais', tu: 'fais', il: 'fait', elle: 'fait', nous: 'faisons', vous: 'faites', ils: 'font', elles: 'font' },
+                imparfait: { je: 'faisais', tu: 'faisais', il: 'faisait', elle: 'faisait', nous: 'faisions', vous: 'faisiez', ils: 'faisaient', elles: 'faisaient' },
+                futur: { je: 'ferai', tu: 'feras', il: 'fera', elle: 'fera', nous: 'ferons', vous: 'ferez', ils: 'feront', elles: 'feront' }
+            }
+        };
+        
+        function getVerbConjugation(verb) {
+            const v = verb.toLowerCase();
+            if (irregularDB[v]) return { verbType: currentLang === 'zh' ? '不規則動詞' : 'Irregular Verb', ...irregularDB[v] };
+            if (v.endsWith('er') && !['aller', 'être', 'avoir', 'faire'].includes(v)) {
+                const stem = v.slice(0, -2);
+                return {
+                    verbType: currentLang === 'zh' ? '第一組動詞 (-er)' : 'Group 1 Verb (-er)',
+                    present: { je: stem+'e', tu: stem+'es', il: stem+'e', elle: stem+'e', nous: stem+'ons', vous: stem+'ez', ils: stem+'ent', elles: stem+'ent' },
+                    imparfait: { je: stem+'ais', tu: stem+'ais', il: stem+'ait', elle: stem+'ait', nous: stem+'ions', vous: stem+'iez', ils: stem+'aient', elles: stem+'aient' },
+                    futur: { je: v+'ai', tu: v+'as', il: v+'a', elle: v+'a', nous: v+'ons', vous: v+'ez', ils: v+'ont', elles: v+'ont' }
+                };
+            }
+            return null;
+        }
+        
+        function speakFrench(text) {
+            if (!text) return;
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'fr-FR';
+            utterance.rate = 0.7;
+            speechSynthesis.cancel();
+            speechSynthesis.speak(utterance);
+        }
+        
+        // 預設資料
+        function getDefaultItems() {
+            return [
+                { id: 1001, french: "parler", english: "說話", type: "verb", level: "A1", known: false, errorCount: 0, example: "Je parle français.", exampleTrans: "我講法文。" },
+                { id: 1002, french: "manger", english: "吃", type: "verb", level: "A1", known: false, errorCount: 0, example: "Je mange une pomme.", exampleTrans: "我吃一個蘋果。" },
+                { id: 1003, french: "être", english: "是", type: "verb", level: "A1", known: false, errorCount: 0, example: "Je suis étudiant.", exampleTrans: "我是學生。" },
+                { id: 1004, french: "avoir", english: "有", type: "verb", level: "A1", known: false, errorCount: 0, example: "J'ai vingt ans.", exampleTrans: "我二十歲。" },
+                { id: 1005, french: "aller", english: "去", type: "verb", level: "A1", known: false, errorCount: 0, example: "Je vais à l'école.", exampleTrans: "我去學校。" },
+                { id: 1006, french: "Bonjour", english: "你好", type: "word", level: "A1", known: false, errorCount: 0, example: "Bonjour!", exampleTrans: "你好！" },
+                { id: 1007, french: "Merci", english: "謝謝", type: "word", level: "A1", known: false, errorCount: 0, example: "Merci beaucoup!", exampleTrans: "非常感謝！" },
+                { id: 1008, french: "Au revoir", english: "再見", type: "word", level: "A1", known: false, errorCount: 0, example: "Au revoir, à demain!", exampleTrans: "再見，明天見！" }
+            ];
+        }
+        
+        function loadData() {
+            const saved = localStorage.getItem('frenchMasterFinal');
+            if (saved) {
+                const data = JSON.parse(saved);
+                items = data.items || [];
+                dailyGoal = data.dailyGoal || 10;
+                todayNewCount = data.todayNewCount || 0;
+                todayReviewCount = data.todayReviewCount || 0;
+                lastResetDate = data.lastResetDate || new Date().toDateString();
+                spellingCorrectCount = data.spellingCorrectCount || 0;
+                spellingTotalCount = data.spellingTotalCount || 0;
+            }
+            if (items.length === 0) items = getDefaultItems();
+            updateErrorList();
+            checkDailyReset();
+        }
+        
+        function saveData() {
+            localStorage.setItem('frenchMasterFinal', JSON.stringify({
+                items, dailyGoal, todayNewCount, todayReviewCount, lastResetDate,
+                spellingCorrectCount, spellingTotalCount
+            }));
+        }
+        
+        function checkDailyReset() {
+            const today = new Date().toDateString();
+            if (lastResetDate !== today) {
+                todayNewCount = 0;
+                todayReviewCount = 0;
+                lastResetDate = today;
+                saveData();
+            }
+            document.getElementById('dailyGoalDisplay').innerText = dailyGoal;
+            document.getElementById('dailyGoalInput').value = dailyGoal;
+        }
+        
+        function setDailyGoal() {
+            dailyGoal = Math.min(50, Math.max(1, parseInt(document.getElementById('dailyGoalInput').value) || 10));
+            document.getElementById('dailyGoalDisplay').innerText = dailyGoal;
+            saveData();
+            updateAllStats();
+        }
+        
+        function updateErrorList() {
+            errorItems = items.filter(i => i.errorCount > 0 && !i.known);
+        }
+        
+        function getFilteredItems() {
+            if (currentLevelFilter === 'all') return items;
+            return items.filter(i => i.type === 'phrase' || i.level === currentLevelFilter);
+        }
+        
+        function getUnlearnedFiltered() {
+            return getFilteredItems().filter(i => !i.known);
+        }
+        
+        // 串字測驗功能
+        function toggleSpellingMode() {
+            const checkbox = document.getElementById('spellingModeToggle');
+            spellingModeEnabled = checkbox.checked;
+            spellingActive = spellingModeEnabled;
+            if (!spellingModeEnabled) {
+                const spellingArea = document.getElementById('spellingArea');
+                const cardArea = document.getElementById('cardArea');
+                if (spellingArea) spellingArea.classList.add('hidden');
+                if (cardArea) cardArea.classList.remove('hidden');
+            }
+            updateDisplay();
+            if (currentMode === 'review') updateReviewDisplay();
+        }
+        
+        function renderSpellingArea(item, isReviewMode = false) {
+            const t = texts[currentLang];
+            const spellingArea = isReviewMode ? document.getElementById('reviewSpellingArea') : document.getElementById('spellingArea');
+            const cardArea = isReviewMode ? document.getElementById('reviewCardArea') : document.getElementById('cardArea');
+            
+            if (!spellingActive || !item) {
+                if (spellingArea) spellingArea.classList.add('hidden');
+                if (cardArea) cardArea.classList.remove('hidden');
+                return;
+            }
+            
+            spellingArea.classList.remove('hidden');
+            if (cardArea) cardArea.classList.add('hidden');
+            
+            spellingArea.innerHTML = `
+                <div class="spelling-question">
+                    <div class="spelling-question-label">${t.spellingQuestion}</div>
+                    <div class="spelling-question-text">${item.english}</div>
+                </div>
+                <div class="spelling-input-container">
+                    <input type="text" id="${isReviewMode ? 'reviewSpellingInput' : 'spellingInput'}" class="spelling-input" placeholder="${t.spellingHint}..." autocomplete="off">
+                    <div class="spelling-buttons">
+                        <button class="btn-check" onclick="${isReviewMode ? `checkReviewSpelling('${item.french.replace(/'/g, "\\'")}')` : `checkSpelling('${item.french.replace(/'/g, "\\'")}', false)`}">${t.checkAnswer}</button>
+                        <button class="btn-skip" onclick="${isReviewMode ? 'skipReviewSpelling()' : 'skipSpelling(false)'}">${t.skipWord}</button>
+                    </div>
+                    <div id="${isReviewMode ? 'reviewSpellingFeedback' : 'spellingFeedback'}" class="spelling-feedback"></div>
+                    <div class="spelling-stats">${t.spellingStats.replace('{correct}', spellingCorrectCount).replace('{total}', spellingTotalCount)}</div>
+                </div>
+            `;
+            
+            setTimeout(() => {
+                const input = document.getElementById(isReviewMode ? 'reviewSpellingInput' : 'spellingInput');
+                if (input) input.focus();
+            }, 100);
+        }
+        
+        function checkSpelling(correctAnswer, isReviewMode) {
+            const t = texts[currentLang];
+            const userAnswer = document.getElementById('spellingInput').value.trim().toLowerCase();
+            const correct = correctAnswer.toLowerCase();
+            const feedbackDiv = document.getElementById('spellingFeedback');
+            
+            spellingTotalCount++;
+            
+            if (userAnswer === correct) {
+                spellingCorrectCount++;
+                feedbackDiv.innerHTML = t.spellingCorrect;
+                feedbackDiv.className = 'spelling-feedback correct';
+                saveData();
+                setTimeout(() => {
+                    if (isReviewMode) reviewCorrectAfterSpelling();
+                    else correctAfterSpelling();
+                }, 1000);
+            } else {
+                feedbackDiv.innerHTML = `${t.spellingWrong} "${correctAnswer}"`;
+                feedbackDiv.className = 'spelling-feedback wrong';
+                saveData();
+                setTimeout(() => {
+                    showAnswerAndContinue(correctAnswer, isReviewMode);
+                }, 1500);
+            }
+            updateSpellingStatsDisplay();
+        }
+        
+        function checkReviewSpelling(correctAnswer) {
+            const t = texts[currentLang];
+            const userAnswer = document.getElementById('reviewSpellingInput').value.trim().toLowerCase();
+            const feedbackDiv = document.getElementById('reviewSpellingFeedback');
+            
+            spellingTotalCount++;
+            
+            if (userAnswer === correctAnswer.toLowerCase()) {
+                spellingCorrectCount++;
+                feedbackDiv.innerHTML = t.spellingCorrect;
+                feedbackDiv.className = 'spelling-feedback correct';
+                saveData();
+                setTimeout(() => reviewCorrectAfterSpelling(), 1000);
+            } else {
+                feedbackDiv.innerHTML = `${t.spellingWrong} "${correctAnswer}"`;
+                feedbackDiv.className = 'spelling-feedback wrong';
+                saveData();
+                setTimeout(() => showReviewAnswerAndContinue(correctAnswer), 1500);
+            }
+            updateSpellingStatsDisplay();
+        }
+        
+        function skipSpelling(isReviewMode) {
+            const item = isReviewMode ? errorItems[reviewIndex] : getFilteredItems()[currentIndex];
+            if (item) showAnswerAndContinue(item.french, isReviewMode);
+        }
+        
+        function skipReviewSpelling() {
+            const item = errorItems[reviewIndex];
+            if (item) showReviewAnswerAndContinue(item.french);
+        }
+        
+        function showAnswerAndContinue(correctAnswer, isReviewMode) {
+            const feedbackDiv = document.getElementById('spellingFeedback');
+            feedbackDiv.innerHTML = `📖 答案是：「${correctAnswer}」`;
+            feedbackDiv.className = 'spelling-feedback';
+            setTimeout(() => {
+                if (isReviewMode) reviewSkipToNext();
+                else skipToNext();
+            }, 1200);
+        }
+        
+        function showReviewAnswerAndContinue(correctAnswer) {
+            const feedbackDiv = document.getElementById('reviewSpellingFeedback');
+            feedbackDiv.innerHTML = `📖 答案是：「${correctAnswer}」`;
+            feedbackDiv.className = 'spelling-feedback';
+            setTimeout(() => reviewSkipToNext(), 1200);
+        }
+        
+        function correctAfterSpelling() {
+            const filtered = getFilteredItems();
+            if (currentIndex >= filtered.length) return;
+            const item = filtered[currentIndex];
+            const originalItem = items.find(i => i.id === item.id);
+            if (originalItem && !originalItem.known) {
+                originalItem.known = true;
+                todayNewCount++;
+                saveData();
+            }
+            moveToNextAfterSpelling();
+        }
+        
+        function reviewCorrectAfterSpelling() {
+            if (errorItems.length === 0) return;
+            const item = errorItems[reviewIndex];
+            const originalItem = items.find(i => i.id === item.id);
+            if (originalItem) originalItem.errorCount = Math.max(0, originalItem.errorCount - 1);
+            saveData();
+            reviewMoveToNextAfterSpelling();
+        }
+        
+        function skipToNext() { moveToNextAfterSpelling(); }
+        function reviewSkipToNext() { reviewMoveToNextAfterSpelling(); }
+        
+        function moveToNextAfterSpelling() {
+            const filtered = getFilteredItems();
+            const nextIndex = filtered.findIndex((i, idx) => !i.known && idx > currentIndex);
+            if (nextIndex !== -1) currentIndex = nextIndex;
+            else currentIndex = filtered.findIndex(i => !i.known);
+            showingFrench = true;
+            showingConjugation = false;
+            updateErrorList();
+            updateAllStats();
+            updateDisplay();
+        }
+        
+        function reviewMoveToNextAfterSpelling() {
+            reviewIndex++;
+            if (reviewIndex >= errorItems.length) reviewIndex = 0;
+            reviewShowingFrench = true;
+            updateErrorList();
+            updateAllStats();
+            updateReviewDisplay();
+        }
+        
+        function updateSpellingStatsDisplay() {
+            const t = texts[currentLang];
+            const statsText = t.spellingStats.replace('{correct}', spellingCorrectCount).replace('{total}', spellingTotalCount);
+            const spellingArea = document.getElementById('spellingArea');
+            const reviewSpellingArea = document.getElementById('reviewSpellingArea');
+            if (spellingArea && spellingArea.querySelector('.spelling-stats')) {
+                spellingArea.querySelector('.spelling-stats').innerHTML = statsText;
+            }
+            if (reviewSpellingArea && reviewSpellingArea.querySelector('.spelling-stats')) {
+                reviewSpellingArea.querySelector('.spelling-stats').innerHTML = statsText;
+            }
+        }
+        
+        // 學習模式顯示
+        function updateDisplay() {
+            const t = texts[currentLang];
+            const unlearned = getUnlearnedFiltered();
+            const cardArea = document.getElementById('cardArea');
+            const spellingArea = document.getElementById('spellingArea');
+            const buttonArea = document.getElementById('buttonArea');
+            
+            if (unlearned.length === 0 && getFilteredItems().length > 0) {
+                cardArea.innerHTML = `
+                    <div class="completion">
+                        <div style="font-size: 64px;">🎉✨🇫🇷</div>
+                        <h2>恭喜完成！</h2>
+                        <div class="completion-buttons">
+                            <button class="completion-btn completion-btn-primary" onclick="restartSameLevel()">${t.restartSameLevel}</button>
+                            <button class="completion-btn completion-btn-secondary" onclick="restartAllLevels()">${t.restartAll}</button>
+                        </div>
+                    </div>
+                `;
+                spellingArea.classList.add('hidden');
+                buttonArea.innerHTML = '';
+                return;
+            }
+            
+            if (getFilteredItems().length === 0) {
+                cardArea.innerHTML = `<div class="completion"><div style="font-size: 48px;">📖</div><p>還沒有內容，請在下方新增</p></div>`;
+                spellingArea.classList.add('hidden');
+                buttonArea.innerHTML = '';
+                return;
+            }
+            
+            const filtered = getFilteredItems();
+            while (currentIndex < filtered.length && filtered[currentIndex].known) currentIndex++;
+            if (currentIndex >= filtered.length) currentIndex = filtered.findIndex(i => !i.known);
+            if (currentIndex === -1) currentIndex = 0;
+            
+            const item = filtered[currentIndex];
+            const typeLabel = item.type === 'verb' ? (currentLang === 'zh' ? '🎭 動詞' : '🎭 Verb') : (item.type === 'phrase' ? (currentLang === 'zh' ? '💬 詞組' : '💬 Phrase') : (currentLang === 'zh' ? '📝 單字' : '📝 Word'));
+            
+            let conjugationHtml = '';
+            let verbTypeInfo = '';
+            
+            if (item.type === 'verb' && showingConjugation && !spellingActive) {
+                const conj = getVerbConjugation(item.french);
+                if (conj && conj.present) {
+                    verbTypeInfo = `<span class="verb-type-tag">${conj.verbType || ''}</span>`;
+                    let rows = '';
+                    const tenseData = conj[currentTense] || conj.present;
+                    for (let p of pronounList) {
+                        if (tenseData[p.key]) {
+                            rows += `
+                                <div class="conjugation-row">
+                                    <span class="conjugation-pronoun">${p.label}</span>
+                                    <span class="conjugation-verb">${tenseData[p.key]}</span>
+                                    <button class="conjugation-speak" onclick="event.stopPropagation(); speakFrench('${tenseData[p.key].replace(/'/g, "\\'")}')">🔊</button>
+                                </div>
+                            `;
+                        }
+                    }
+                    conjugationHtml = `
+                        <div class="conjugation-section">
+                            <div class="tense-selector">
+                                <button class="tense-btn ${currentTense === 'present' ? 'active-tense' : ''}" onclick="event.stopPropagation(); changeTense('present')">Présent</button>
+                                <button class="tense-btn ${currentTense === 'imparfait' ? 'active-tense' : ''}" onclick="event.stopPropagation(); changeTense('imparfait')">Imparfait</button>
+                                <button class="tense-btn ${currentTense === 'futur' ? 'active-tense' : ''}" onclick="event.stopPropagation(); changeTense('futur')">Futur</button>
+                            </div>
+                            <div class="conjugation-table">${rows}</div>
+                        </div>
+                    `;
+                }
+            }
+            
+            let exampleHtml = '';
+            if (item.example && item.example.trim() && !showingConjugation && !spellingActive) {
+                exampleHtml = `
+                    <div class="example-section">
+                        <div class="example-header">
+                            <span class="example-title">${t.exampleTitle}</span>
+                            <button class="example-speak-btn" onclick="event.stopPropagation(); speakFrench('${item.example.replace(/'/g, "\\'")}')">🔊</button>
+                        </div>
+                        <div class="example-text">${item.example}</div>
+                        ${item.exampleTrans ? `<div class="example-trans">${item.exampleTrans}</div>` : ''}
+                    </div>
+                `;
+            }
+            
+            if (spellingActive && !showingConjugation) {
+                renderSpellingArea(item, false);
+            } else {
+                cardArea.classList.remove('hidden');
+                spellingArea.classList.add('hidden');
+                const displayWord = showingFrench ? item.french : item.english;
+                const displayClass = showingFrench ? 'french' : 'english';
+                
+                cardArea.innerHTML = `
+                    <div class="flashcard" onclick="flipCard()">
+                        <div class="badge-container">
+                            ${item.level ? `<span class="level-tag">${item.level}</span>` : ''}
+                            <span class="type-tag">${typeLabel}</span>
+                            ${verbTypeInfo}
+                        </div>
+                        <button class="speak-btn" onclick="event.stopPropagation(); speakFrench('${item.french.replace(/'/g, "\\'")}')">🔊</button>
+                        <div class="${displayClass}">${displayWord}</div>
+                        <div class="flip-hint">${t.flipHint}</div>
+                        ${exampleHtml}
+                        ${conjugationHtml}
+                    </div>
+                `;
+            }
+            
+            let conjugationButton = '';
+            if (item.type === 'verb' && !spellingActive) {
+                conjugationButton = `<button class="show-conjugation-btn" onclick="event.stopPropagation(); toggleConjugation()">${showingConjugation ? t.hideConjugation : t.showConjugation}</button>`;
+            }
+            
+            buttonArea.innerHTML = `
+                <div class="buttons">
+                    <button class="btn-review" onclick="markWrong()">${t.needReview}</button>
+                    <button class="btn-know" onclick="markCorrect()">${t.correct}</button>
+                </div>
+                ${conjugationButton}
+                <button class="btn-reset" onclick="resetSession()">${t.resetSession}</button>
+            `;
+        }
+        
+        function flipCard() {
+            // 如果正在顯示動詞變化，先關閉
+            if (showingConjugation) {
+                showingConjugation = false;
+            } else {
+                // 只翻轉法文/中文顯示，不改變 currentIndex
+                showingFrench = !showingFrench;
+            }
+            updateDisplay();
+        }
+        
+        function toggleConjugation() {
+            showingConjugation = !showingConjugation;
+            updateDisplay();
+        }
+        
+        function changeTense(tense) {
+            currentTense = tense;
+            updateDisplay();
+        }
+        
+        function markCorrect() {
+            const filtered = getFilteredItems();
+            if (currentIndex >= filtered.length) return;
+            const item = filtered[currentIndex];
+            const originalItem = items.find(i => i.id === item.id);
+            if (originalItem && !originalItem.known) {
+                originalItem.known = true;
+                todayNewCount++;
+                saveData();
+            }
+            // 移到下一個未學會的單字
+            const nextIndex = filtered.findIndex((i, idx) => !i.known && idx > currentIndex);
+            if (nextIndex !== -1) {
+                currentIndex = nextIndex;
+            } else {
+                currentIndex = filtered.findIndex(i => !i.known);
+            }
+            // 重置顯示狀態
+            showingFrench = true;
+            showingConjugation = false;
+            updateErrorList();
+            updateAllStats();
+            updateDisplay();
+        }
+        
+        function markWrong() {
+            const filtered = getFilteredItems();
+            if (currentIndex >= filtered.length) return;
+            const item = filtered[currentIndex];
+            const originalItem = items.find(i => i.id === item.id);
+            if (originalItem) {
+                originalItem.errorCount++;
+                todayReviewCount++;
+                saveData();
+            }
+            // 移到下一個未學會的單字
+            const nextIndex = filtered.findIndex((i, idx) => !i.known && idx > currentIndex);
+            if (nextIndex !== -1) {
+                currentIndex = nextIndex;
+            } else {
+                currentIndex = filtered.findIndex(i => !i.known);
+            }
+            // 重置顯示狀態
+            showingFrench = true;
+            showingConjugation = false;
+            updateErrorList();
+            updateAllStats();
+            updateDisplay();
+        }
+        
+        function resetSession() {
+            items.forEach(i => { i.known = false; i.errorCount = 0; });
+            currentIndex = 0;
+            showingFrench = true;
+            showingConjugation = false;
+            saveData();
+            updateErrorList();
+            updateAllStats();
+            updateDisplay();
+        }
+        
+        function restartSameLevel() {
+            const filtered = getFilteredItems();
+            filtered.forEach(item => {
+                const original = items.find(i => i.id === item.id);
+                if (original) original.known = false;
+            });
+            currentIndex = 0;
+            showingFrench = true;
+            showingConjugation = false;
+            saveData();
+            updateErrorList();
+            updateAllStats();
+            updateDisplay();
+        }
+        
+        function restartAllLevels() {
+            items.forEach(i => { i.known = false; i.errorCount = 0; });
+            currentIndex = 0;
+            showingFrench = true;
+            showingConjugation = false;
+            saveData();
+            updateErrorList();
+            updateAllStats();
+            updateDisplay();
+        }
+        
+        // 複習模式
+        function updateReviewDisplay() {
+            const t = texts[currentLang];
+            updateErrorList();
+            const cardArea = document.getElementById('reviewCardArea');
+            const spellingArea = document.getElementById('reviewSpellingArea');
+            const buttonArea = document.getElementById('reviewButtonArea');
+            
+            if (errorItems.length === 0) {
+                cardArea.innerHTML = `<div class="completion"><div style="font-size: 48px;">✅</div><p>${t.noReview}</p></div>`;
+                buttonArea.innerHTML = '';
+                return;
+            }
+            
+            if (reviewIndex >= errorItems.length) reviewIndex = 0;
+            const item = errorItems[reviewIndex];
+            const typeLabel = item.type === 'verb' ? (currentLang === 'zh' ? '🎭 動詞' : '🎭 Verb') : (item.type === 'phrase' ? (currentLang === 'zh' ? '💬 詞組' : '💬 Phrase') : (currentLang === 'zh' ? '📝 單字' : '📝 Word'));
+            
+            if (spellingActive) {
+                renderSpellingArea(item, true);
+                buttonArea.innerHTML = '';
+            } else {
+                cardArea.classList.remove('hidden');
+                spellingArea.classList.add('hidden');
+                const displayWord = reviewShowingFrench ? item.french : item.english;
+                const displayClass = reviewShowingFrench ? 'french' : 'english';
+                
+                cardArea.innerHTML = `
+                    <div class="flashcard" onclick="reviewFlipCard()">
+                        <div class="badge-container">
+                            ${item.level ? `<span class="level-tag">${item.level}</span>` : ''}
+                            <span class="type-tag">${typeLabel}</span>
+                        </div>
+                        <button class="speak-btn" onclick="event.stopPropagation(); speakFrench('${item.french.replace(/'/g, "\\'")}')">🔊</button>
+                        <div class="${displayClass}">${displayWord}</div>
+                        <div class="flip-hint">${t.flipHint}</div>
+                    </div>
+                `;
+                
+                buttonArea.innerHTML = `
+                    <div class="review-badge">📊 待複習: ${errorItems.length}</div>
+                    <div class="buttons">
+                        <button class="btn-review" onclick="reviewWrong()">${t.needReview}</button>
+                        <button class="btn-know" onclick="reviewCorrect()">${t.correct}</button>
+                    </div>
+                `;
+            }
+        }
+        
+        function reviewFlipCard() {
+            reviewShowingFrench = !reviewShowingFrench;
+            updateReviewDisplay();
+        }
+        
+        function reviewCorrect() {
+            if (errorItems.length === 0) return;
+            const item = errorItems[reviewIndex];
+            const originalItem = items.find(i => i.id === item.id);
+            if (originalItem) originalItem.errorCount = Math.max(0, originalItem.errorCount - 1);
+            reviewIndex++;
+            if (reviewIndex >= errorItems.length) reviewIndex = 0;
+            reviewShowingFrench = true;
+            saveData();
+            updateErrorList();
+            updateAllStats();
+            updateReviewDisplay();
+        }
+        
+        function reviewWrong() {
+            if (errorItems.length === 0) return;
+            const item = errorItems[reviewIndex];
+            const originalItem = items.find(i => i.id === item.id);
+            if (originalItem) originalItem.errorCount++;
+            reviewIndex++;
+            if (reviewIndex >= errorItems.length) reviewIndex = 0;
+            reviewShowingFrench = true;
+            saveData();
+            updateErrorList();
+            updateAllStats();
+            updateReviewDisplay();
+        }
+        
+        // 統計
+        function updateAllStats() {
+            const filtered = getFilteredItems();
+            const total = filtered.length;
+            const mastered = filtered.filter(i => i.known).length;
+            const totalErrors = items.reduce((sum, i) => sum + i.errorCount, 0);
+            const totalAttempts = items.reduce((sum, i) => sum + (i.errorCount + (i.known ? 1 : 0)), 0);
+            const accuracy = totalAttempts > 0 ? Math.round((totalAttempts - totalErrors) / totalAttempts * 100) : 0;
+            
+            document.getElementById('totalWordsStat').innerText = total;
+            document.getElementById('masteredStat').innerText = mastered;
+            document.getElementById('errorStat').innerText = errorItems.length;
+            document.getElementById('accuracyStat').innerText = accuracy + '%';
+            
+            const levels = ['A1', 'A2', 'B1', 'B2', 'C1'];
+            let levelHtml = '';
+            for (let lvl of levels) {
+                const levelItems = items.filter(i => i.level === lvl);
+                const levelTotal = levelItems.length;
+                const levelMastered = levelItems.filter(i => i.known).length;
+                if (levelTotal > 0) {
+                    const percent = Math.round(levelMastered / levelTotal * 100);
+                    levelHtml += `
+                        <div class="stats-row"><span>📘 ${lvl} (${levelMastered}/${levelTotal})</span><span>${percent}%</span></div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: ${percent}%; background: #8b5cf6;"></div></div>
+                    `;
+                }
+            }
+            document.getElementById('levelProgressContainer').innerHTML = levelHtml || '<div class="stats-row">無分級數據</div>';
+            
+            document.getElementById('todayNewCount').innerText = todayNewCount;
+            document.getElementById('todayReviewCount').innerText = todayReviewCount;
+            document.getElementById('dailyProgressFill').style.width = Math.min(100, (todayNewCount / dailyGoal) * 100) + '%';
+        }
+        
+        function resetAllStats() {
+            if (confirm('確定要重置所有學習進度嗎？')) {
+                items.forEach(i => { i.known = false; i.errorCount = 0; });
+                todayNewCount = 0;
+                todayReviewCount = 0;
+                spellingCorrectCount = 0;
+                spellingTotalCount = 0;
+                currentIndex = 0;
+                reviewIndex = 0;
+                saveData();
+                updateErrorList();
+                updateAllStats();
+                updateDisplay();
+                if (currentMode === 'review') updateReviewDisplay();
+            }
+        }
+        
+        // 新增項目
+        function setAddType(type) {
+            addType = type;
+            document.querySelectorAll('.type-btn').forEach(btn => btn.classList.remove('active-type'));
+            if (type === 'word') document.querySelectorAll('.type-btn')[0].classList.add('active-type');
+            else if (type === 'verb') document.querySelectorAll('.type-btn')[1].classList.add('active-type');
+            else document.querySelectorAll('.type-btn')[2].classList.add('active-type');
+            document.getElementById('levelSelectorContainer').style.display = type !== 'phrase' ? 'flex' : 'none';
+        }
+        
+        function selectAddLevel(level) {
+            addSelectedLevel = level;
+            document.querySelectorAll('.level-option').forEach(opt => {
+                opt.classList.remove('active-level-option');
+                if (opt.getAttribute('data-level') === level) opt.classList.add('active-level-option');
+            });
+        }
+        
+        function addItem() {
+            const native = document.getElementById('nativeInput').value.trim();
+            const target = document.getElementById('targetInput').value.trim();
+            const example = document.getElementById('exampleInput').value.trim();
+            const exampleTrans = document.getElementById('exampleTransInput').value.trim();
+            
+            if (!native || !target) {
+                alert('請填寫法文和翻譯！');
+                return;
+            }
+            
+            items.push({
+                id: Date.now(),
+                french: native.charAt(0).toUpperCase() + native.slice(1).toLowerCase(),
+                english: target,
+                type: addType,
+                level: addType !== 'phrase' ? addSelectedLevel : null,
+                known: false,
+                errorCount: 0,
+                example: example || null,
+                exampleTrans: exampleTrans || null
+            });
+            saveData();
+            
+            document.getElementById('nativeInput').value = '';
+            document.getElementById('targetInput').value = '';
+            document.getElementById('exampleInput').value = '';
+            document.getElementById('exampleTransInput').value = '';
+            updateErrorList();
+            updateAllStats();
+            updateDisplay();
+            
+            alert(`✅ 已新增「${native}」！`);
+        }
+        
+        // 語言切換
+        function updateLanguageUI() {
+            const t = texts[currentLang];
+            document.getElementById('mainTitle').innerText = t.mainTitle;
+            document.getElementById('mainSub').innerText = t.mainSub;
+            document.getElementById('spellingToggleLabel').innerHTML = `${t.spellingToggle} <span style="font-size: 11px;">(看中文 • 打法文)</span>`;
+            
+            const levelBadges = document.querySelectorAll('.level-badge');
+            if (levelBadges.length >= 6) {
+                levelBadges[0].innerHTML = currentLang === 'zh' ? '📚 全部' : '📚 All';
+                levelBadges[1].innerHTML = t.levelA1 || (currentLang === 'zh' ? '🇫🇷 A1 初級' : '🇫🇷 A1 Beginner');
+                levelBadges[2].innerHTML = t.levelA2 || (currentLang === 'zh' ? '🇫🇷 A2 基礎' : '🇫🇷 A2 Elementary');
+                levelBadges[3].innerHTML = t.levelB1 || (currentLang === 'zh' ? '🇫🇷 B1 中級' : '🇫🇷 B1 Intermediate');
+                levelBadges[4].innerHTML = t.levelB2 || (currentLang === 'zh' ? '🇫🇷 B2 中高級' : '🇫🇷 B2 Upper');
+                levelBadges[5].innerHTML = t.levelC1 || (currentLang === 'zh' ? '🇫🇷 C1 高級' : '🇫🇷 C1 Advanced');
+            }
+            
+            document.getElementById('tabLearnText').innerText = t.tabLearn;
+            document.getElementById('tabReviewText').innerText = t.tabReview;
+            document.getElementById('tabStatsText').innerText = t.tabStats;
+            document.getElementById('goalTitle').innerText = t.goalTitle;
+            document.getElementById('setGoalBtn').innerText = t.setGoal;
+            document.getElementById('todayNewLabel').innerHTML = t.todayNew;
+            document.getElementById('todayReviewLabel').innerHTML = t.todayReview;
+            document.getElementById('statTotalLabel').innerText = t.statTotal;
+            document.getElementById('statMasteredLabel').innerText = t.statMastered;
+            document.getElementById('statErrorLabel').innerText = t.statError;
+            document.getElementById('statAccuracyLabel').innerText = t.statAccuracy;
+            document.getElementById('resetAllBtn').innerHTML = t.resetAll;
+            document.getElementById('addTitle').innerText = t.addTitle;
+            document.getElementById('typeWordText').innerText = t.typeWord;
+            document.getElementById('typeVerbText').innerText = t.typeVerb;
+            document.getElementById('typePhraseText').innerText = t.typePhrase;
+            document.getElementById('addBtn').innerHTML = t.addBtn;
+            
+            updateDisplay();
+            if (currentMode === 'review') updateReviewDisplay();
+            updateAllStats();
+        }
+        
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active-lang'));
+            if (lang === 'zh') document.querySelectorAll('.lang-btn')[0].classList.add('active-lang');
+            else document.querySelectorAll('.lang-btn')[1].classList.add('active-lang');
+            updateLanguageUI();
+        }
+        
+        function filterByLevel(level) {
+            currentLevelFilter = level;
+            document.querySelectorAll('.level-badge').forEach(badge => {
+                badge.classList.remove('active-level');
+                if (badge.getAttribute('data-level') === level) badge.classList.add('active-level');
+            });
+            currentIndex = 0;
+            showingFrench = true;
+            updateDisplay();
+            updateAllStats();
+        }
+        
+        function switchTab(tab) {
+            currentMode = tab;
+            const learnSection = document.getElementById('learnSection');
+            const reviewSection = document.getElementById('reviewSection');
+            const statsSection = document.getElementById('statsSection');
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(t => t.classList.remove('active'));
+            
+            if (tab === 'learn') {
+                learnSection.classList.remove('hidden');
+                reviewSection.classList.add('hidden');
+                statsSection.classList.add('hidden');
+                tabs[0].classList.add('active');
+                updateDisplay();
+            } else if (tab === 'review') {
+                learnSection.classList.add('hidden');
+                reviewSection.classList.remove('hidden');
+                statsSection.classList.add('hidden');
+                tabs[1].classList.add('active');
+                reviewIndex = 0;
+                reviewShowingFrench = true;
+                updateReviewDisplay();
+            } else {
+                learnSection.classList.add('hidden');
+                reviewSection.classList.add('hidden');
+                statsSection.classList.remove('hidden');
+                tabs[2].classList.add('active');
+                updateAllStats();
+            }
+        }
+        
+        // 初始化
+        loadData();
+        updateAllStats();
+        updateDisplay();
+        setAddType('word');
+        selectAddLevel('A1');
+    </script>
+</body>
+</html>
